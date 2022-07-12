@@ -34,11 +34,21 @@ function makeGame() {
     for (let i = 0; i < dData.length; i++) {
         let card = document.createElement("img");
         card.setAttribute("class", "card");
-        card.setAttribute("data-name", dData[i].name);
+        //this can't be used or players can find from inspecting the page
+        // card.setAttribute("data-name", dData[i].name);
         card.setAttribute("data-id", i);
-        card.setAttribute("src", dData[i].img);
+        //need to set to background image
+        // card.setAttribute("src", dData[i].img);
+        card.setAttribute("src", "./assets/images/background.png");
+        card.addEventListener("click", turnCard);
         grid.appendChild(card);
     }
+}
+
+function turnCard() {
+    // console.log(this);
+    cardId = this.getAttribute("data-id");
+    console.log(cardId);
 }
 
 makeGame();
