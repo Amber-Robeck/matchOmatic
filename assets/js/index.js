@@ -17,6 +17,7 @@ const dData = [
         img: "./assets/images/mike.png",
     }
 ];
+const fetchData = [];
 
 let userChoice = [];
 
@@ -26,6 +27,42 @@ console.log(dData);
 
 let grid = document.createElement("div");
 // const grid = document.querySelector("#grid");
+
+//function to fetch random images of puppies and then push item twice into fetchData array
+function fetchPuppy(n) {
+    for (let i = 0; i < n; i++) {
+        fetch("https://dog.ceo/api/breeds/image/random")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                fetchData.push({
+                    name: `puppy${i}`,
+                    img: data.message,
+                });
+                fetchData.push({
+                    name: `puppy${i}`,
+                    img: data.message,
+                });
+                console.log(fetchData);
+            }).catch(err => console.log(err));
+    }
+    // fetch("https://dog.ceo/api/breeds/image/random")
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         console.log(data);
+    //         let img = document.createElement("img");
+    //         img.setAttribute("src", data.message);
+    //         document.body.appendChild(img);
+    //     }
+    //     )
+    //     .catch(error => console.log(error));
+}
+
+
+
+
+
+
 
 function makeGame() {
     //create the grid
@@ -86,3 +123,4 @@ function turnCard() {
 
 
 makeGame();
+fetchPuppy(2);
