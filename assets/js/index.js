@@ -52,9 +52,24 @@ function turnCard() {
     // console.log(this);
     cardId = this.getAttribute("data-id");
     console.log(cardId);
-    // console.log(dData[cardId].name);
-    userChoice.push(dData[cardId].name);
-    console.log(userChoice)
+    if (userChoice.length < 2) {
+        // console.log(dData[cardId].name);
+        userChoice.push(dData[cardId].name);
+        console.log(userChoice);
+    }
+    //if I use else if, this condition doesn't run until there are three cards Perhaps change to switch for long term
+    if (userChoice.length === 2) {
+        console.log("checking for match");
+        if (userChoice[0] === userChoice[1]) {
+            console.log("match");
+            userChoice = [];
+        }
+        else {
+            console.log("no match");
+            userChoice = [];
+        }
+    }
 }
+
 
 makeGame();
