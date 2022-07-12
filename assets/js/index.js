@@ -18,6 +18,8 @@ const dData = [
     }
 ];
 
+let userChoice = [];
+
 //shuffle the array
 dData.sort(() => Math.random() - 0.5);
 console.log(dData);
@@ -45,10 +47,14 @@ function makeGame() {
     }
 }
 
+//turning the card over by setting image by data-id
 function turnCard() {
     // console.log(this);
     cardId = this.getAttribute("data-id");
     console.log(cardId);
+    // console.log(dData[cardId].name);
+    userChoice.push(dData[cardId].name);
+    console.log(userChoice)
 }
 
 makeGame();
