@@ -24,48 +24,64 @@ let fetchData1 = [];
 let fetchData2 = [];
 let userChoice = [];
 
+// fetchData.length > 1 ? arr = fetchData : arr = dData;
+
 //shuffle the array
-// dData.sort(() => Math.random() - 0.5);
-// console.log(dData);
+// arr.sort(() => Math.random() - 0.5);
+// console.log(arr, "arr");
 
 
 //function to fetch random images of puppies and then push item twice into fetchData array
-function fetchPuppy(n) {
-    for (let i = 0; i < n; i++) {
-        fetch("https://dog.ceo/api/breeds/image/random")
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                fetchData.push({
-                    name: `puppy${i}`,
-                    img: data.message,
-                });
-                fetchData.push({
-                    name: `puppy${i}`,
-                    img: data.message,
-                });
-                // console.log(fetchData);
-            })
-            // .then(makeGame)
-            .catch(err => console.log(err));
+async function fetchPuppy() {
+    // for (let i = 0; i < n; i++) {
+    fetch("https://dog.ceo/api/breeds/image/random")
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data);
+            fetchData.push({
+                name: `puppy${fetchData.length}`,
+                img: data.message,
+            });
+            fetchData.push({
+                name: `puppy${fetchData.length}`,
+                img: data.message,
+            });
+            console.log(fetchData);
+        })
+        // .then(() => {
+        //     // console.log(fetchData);
+        //     mixArray(fetchData);
+        // })
+
+        // .then(makeGame)
+        .catch(err => console.log(err));
+    // }
+}
+
+
+
+
+
+
+async function checkData() {
+    // console.log('checkData', fetchData);
+    fetchData.length > 1 ? arr = fetchData : arr = dData;
+    // arr.sort(() => 0.5 - Math.random());
+    // mixArray(arr);
+    // makeGame();
+    return arr;
+}
+
+async function makeGame() {
+    for (let i = 0; i < 4; i++) {
+        fetchPuppy()
     }
-    checkData();
-}
-
-
-
-
-
-
-function checkData() {
-    console.log('checkData', fetchData);
-    fetchData ? arr = fetchData : arr = dData;
-    mixArray(arr);
-
-}
-
-function makeGame() {
-    console.log("in makeGame", fetchData)
+    // await checkData();
+    // fetchData.length > 1 ? arr = fetchData : arr = dData;
+    console.log("in makeGame", fetchData);
+    // arr.sort(() => Math.random() - 0.5);
+    // arr = mixArray(arr);
+    console.log("insort", arr);
     //create the grid
     grid = document.createElement("div");
     grid.setAttribute("id", "grid");
@@ -91,14 +107,23 @@ function makeGame() {
     // }
 }
 
-function mixArray(array) {
-    array.sort(() => Math.random() - 0.5);
-    console.log("insort", array);
-    return array;
+async function mixArray(array) {
+    // console.log(array, "mixArray");
+    let newArr = [];
+    for (let i = 0; i < array.length; i++) {
+        let random = Math.floor(Math.random() * array.length);
+        newArr.push(array[random]);
+        array.splice(random, 1);
+    }
+    return newArr;
+    // // fetchData.length > 1 ? array = fetchData : array = dData;
+    // array.sort((a, b) => 0.5 - Math.random());
+    // console.log("mixarr", array);
+
 }
 function makeCard() {
     //create the cards
-    console.log(arr)
+    console.log(arr, "makecard")
     for (let i = 0; i < arr.length; i++) {
         let card = document.createElement("img");
         card.setAttribute("class", "card");
@@ -150,5 +175,5 @@ function turnCard() {
 }
 
 
-// makeGame();
-fetchPuppy(4);
+makeGame();
+// fetchPuppy(4);
