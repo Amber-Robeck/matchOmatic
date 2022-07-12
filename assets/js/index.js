@@ -71,17 +71,15 @@ function turnCard() {
         else {
             console.log("no match");
             //change cards back to background image
-            // userChoice[0].id.setAttribute("src", "./assets/images/background.png");
-            // userChoice[1].id.setAttribute("src", "./assets/images/background.png");
-            // cardId.setAttribute("src", "./assets/images/background.png");
-            // this.setAttribute("src", "./assets/images/background.png");
-            console.log(userChoice[0].id, userChoice[1].id);
-            let choice1 = document.querySelector('[data-id="' + userChoice[0].id + '"]');
-            choice1.setAttribute("src", "./assets/images/background.png");
-            let choice2 = document.querySelector('[data-id="' + userChoice[1].id + '"]');
-            choice2.setAttribute("src", "./assets/images/background.png");
-            // console.log(choice1);
-            userChoice = [];
+            setTimeout(function () {
+                console.log(userChoice[0].id, userChoice[1].id);
+                let choice1 = document.querySelector('[data-id="' + userChoice[0].id + '"]');
+                choice1.setAttribute("src", "./assets/images/background.png");
+                let choice2 = document.querySelector('[data-id="' + userChoice[1].id + '"]');
+                choice2.setAttribute("src", "./assets/images/background.png");
+                // console.log(choice1);
+                userChoice = [];
+            }, 1500);
         }
     }
 }
