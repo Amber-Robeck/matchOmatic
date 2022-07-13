@@ -32,6 +32,7 @@ let userChoice = [];
 //function to fetch random images of puppies and then push item twice into fetchData array
 async function fetchPuppy() {
     // for (let i = 0; i < n; i++) {
+
     await fetch("https://dog.ceo/api/breeds/image/random")
         .then(response => response.json())
         .then(data => {
@@ -39,11 +40,14 @@ async function fetchPuppy() {
             fetchData.push({
                 name: `puppy${fetchData.length}`,
                 img: data.message,
-            });
-            fetchData.push({
+            }, {
                 name: `puppy${fetchData.length}`,
                 img: data.message,
             });
+            // fetchData.push({
+            //     name: `puppy${fetchData.length}`,
+            //     img: data.message,
+            // });
             // console.log(fetchData);
         })
         // .then(() => {
