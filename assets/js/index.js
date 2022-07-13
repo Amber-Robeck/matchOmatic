@@ -32,7 +32,7 @@ let userChoice = [];
 //function to fetch random images of puppies and then push item twice into fetchData array
 async function fetchPuppy() {
     // for (let i = 0; i < n; i++) {
-    fetch("https://dog.ceo/api/breeds/image/random")
+    await fetch("https://dog.ceo/api/breeds/image/random")
         .then(response => response.json())
         .then(data => {
             // console.log(data);
@@ -61,20 +61,23 @@ async function fetchPuppy() {
 
 
 
-// async function checkData() {
-//     console.log(fetchData.length)
-//     if (fetchData.length > 1) {
-//         arr = fetchData;
-//     } else {
-//         arr = dData;
-//     }
-//     // console.log('checkData', fetchData);
-//     // fetchData?.length ? arr = fetchData : arr = dData;
-//     // arr.sort(() => 0.5 - Math.random());
-//     // mixArray(arr);
-//     // makeGame();
-//     return arr;
-// }
+async function checkData() {
+    console.log(fetchData.length)
+    // if (fetchData.length > 1) {
+    //     arr = fetchData;
+    // } else {
+    //     arr = dData;
+    // }
+    // console.log('checkData', fetchData);
+    fetchData.length ? arr = fetchData : arr = dData;
+    // arr.sort(() => 0.5 - Math.random());
+    // mixArray(arr);
+    // makeGame();
+    return arr;
+}
+
+//test array to make sure mixArray works
+// let aTest = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 function mixArray(array) {
     // console.log(array, "mixArray");
     return array.sort(() => 0.5 - Math.random());
@@ -86,7 +89,7 @@ async function callPuppy() {
         await fetchPuppy()
     }
     console.log("callPuppy", fetchData);
-    return;
+    return fetchData;
 }
 
 async function makeGame() {
@@ -95,12 +98,16 @@ async function makeGame() {
     // }
     await callPuppy();
     console.log(fetchData, "makeGame");
+    await checkData();
     // fetchData.sort(() => Math.random() - 0.5);
     await mixArray(fetchData);
+    //tested mixArray function
+    // await mixArray(aTest)
+    // console.log(aTest, "aTest");
     console.log(fetchData, "makeGameSorted");
     console.log(fetchData.length, "makeGameLength");
 
-    fetchData.length > 1 ? arr = fetchData : arr = dData;
+    // fetchData.length > 1 ? arr = fetchData : arr = dData;
     // console.log("in makeGame", fetchData);
     // arr.sort(() => Math.random() - 0.5);
     // arr = await mixArray(arr);
