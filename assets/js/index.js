@@ -108,6 +108,29 @@ async function makeGame() {
     makeCard();
 };
 
+async function makeGameClone() {
+    await callPuppy();
+    await checkData();
+    await mixArray(fetchData);
+    //create the grid
+    grid = document.createElement("div");
+    grid.setAttribute("id", "grid");
+    document.body.prepend(grid);
+    //adding header with title and score elements
+    let header = document.createElement("header");
+    header.setAttribute("id", "header");
+    let title = document.createElement("h1");
+    title.setAttribute("id", "title");
+    title.innerHTML = "MatchOMatic";
+    header.append(title);
+    let score = document.createElement("div");
+    score.setAttribute("id", "score");
+    score.innerHTML = "Score: 0";
+    header.append(score);
+    document.body.prepend(header);
+    makeCard();
+};
+
 function makeCard() {
     //create the cards and append to grid
     for (let i = 0; i < arr.length; i++) {
@@ -174,7 +197,22 @@ function turnCard() {
         }
     }
 }
-
+var options = document.getElementById("options");
+options.addEventListener("click", function (e) {
+    // console.log(e.target.id)
+    let optionPicked = e.target.id;
+    switch (optionPicked) {
+        case "dogs":
+            console.log("dogs");
+            break;
+        case "cats":
+            console.log("cats");
+            break;
+        case "random":
+            console.log("random");
+            break;
+    }
+});
 //function to start the game
 makeGame();
 
