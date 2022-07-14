@@ -41,7 +41,7 @@ Currently this application is able to:
 
   ## Installation
 
-This project is deployed on [GitHub Pages](https://amber-robeck.github.io/matchOmatic/ "GitHub Pages").
+This project is deployed on [GitHub Pages](https://amber-robeck.github.io/matchOmatic/ "GitHub Pages") and does not need to be installed.
 
 
   ---
@@ -60,10 +60,10 @@ This project is deployed on [GitHub Pages](https://amber-robeck.github.io/matchO
 
 Here are some screen shots of this application.
 
+Currently this application does not have any screenshots.
 
-<img src="./assets/gamePlay.png" alt="screenshot of gameplay" width="700"/>
+<img src="" alt="" width="700"/>
 
-<img src="./assets/gamePlay2.png" alt="screenshot of gameplay" width="700"/>
 
 
 
