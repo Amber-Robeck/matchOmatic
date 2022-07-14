@@ -32,7 +32,7 @@ This application:
   ## Usage
 
 Currently this application is able to:
-* Retrieve data from the DOG API.
+* Retrieve data from the [DOG API](https://dog.ceo/dog-api/ "DOG API") and display the pictures as cards.
 
 
 
@@ -103,7 +103,6 @@ SOFTWARE.
 
 However you would like to contribute I always look forward to learning something new, feel free to email me!
 
-  [Contributor Covenant](https://www.contributor-covenant.org/)
 
   ---
 

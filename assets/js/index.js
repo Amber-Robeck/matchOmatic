@@ -17,18 +17,40 @@ const dData = [
         img: "./assets/images/mike.png",
     }
 ];
+
+//While this does return 4 different images due to adding different params, it does not change images often like the puppy api
+catUrl = "https://cataas.com/cat";
+const catData = [
+    {
+        name: "cat1",
+        img: catUrl
+    },
+    {
+        name: "cat2",
+        img: catUrl + "?t=sm",
+    },
+    {
+        name: "cat3",
+        img: catUrl + "?t=md",
+    },
+    {
+        name: "cat4",
+        img: catUrl + "?t=sq",
+    }
+];
 let arr = [];
 let grid;
 let scorePoints = 0;
 let fetchData = [];
 let userChoice = [];
 
-
+console.log(catData)
 
 //function to fetch random images of puppies and then push item twice into fetchData array
 async function fetchPuppy() {
     //Dog API call    
-    await fetch("https://dog.ceo/api/breeds/image/random")
+    url = "https://dog.ceo/api/breeds/image/random";
+    await fetch(url)
         .then(response => response.json())
         .then(data => {
             fetchData.push({
@@ -99,8 +121,22 @@ function makeCard() {
         card.addEventListener("click", turnCard);
         grid.appendChild(card);
     };
-};
 
+    //testing cat data
+    // for (let i = 0; i < catData.length; i++) {
+    //     let card = document.createElement("img");
+    //     card.setAttribute("class", "card");
+    //     //this can't be used or players can find from inspecting the page
+    //     // card.setAttribute("data-name", dData[i].name);
+    //     card.setAttribute("data-id", i);
+    //     //Set to background image for start of game play
+    //     card.setAttribute("src", catData[i].img);
+    //     // card.setAttribute("src", "./assets/images/background.png");
+    //     card.addEventListener("click", turnCard);
+    //     grid.appendChild(card);
+    // };
+
+};
 //turning the card over by setting image by data-id
 function turnCard() {
     cardId = this.getAttribute("data-id");
