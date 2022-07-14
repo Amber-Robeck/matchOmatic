@@ -94,17 +94,17 @@ async function makeGame() {
     grid.setAttribute("id", "grid");
     document.body.prepend(grid);
     //adding header with title and score elements
-    let header = document.createElement("header");
-    header.setAttribute("id", "header");
-    let title = document.createElement("h1");
-    title.setAttribute("id", "title");
-    title.innerHTML = "MatchOMatic";
-    header.append(title);
-    let score = document.createElement("div");
-    score.setAttribute("id", "score");
-    score.innerHTML = "Score: 0";
-    header.append(score);
-    document.body.prepend(header);
+    // let header = document.createElement("header");
+    // header.setAttribute("id", "header");
+    // let title = document.createElement("h1");
+    // title.setAttribute("id", "title");
+    // title.innerHTML = "MatchOMatic";
+    // header.append(title);
+    // let score = document.createElement("div");
+    // score.setAttribute("id", "score");
+    // score.innerHTML = "Score: 0";
+    // header.append(score);
+    // document.body.prepend(header);
     makeCard();
 };
 
@@ -196,14 +196,42 @@ function turnCard() {
             }, 1500);
         }
     }
+};
+
+
+function makeHeader() {
+    let header = document.createElement("header");
+    header.setAttribute("id", "header");
+    let title = document.createElement("h1");
+    title.setAttribute("id", "title");
+    title.innerHTML = "MatchOMatic";
+    header.append(title);
+    let score = document.createElement("div");
+    score.setAttribute("id", "score");
+    score.innerHTML = "Score: 0";
+    header.append(score);
+    let userOptionsDiv = document.createElement("div");
+    userOptionsDiv.setAttribute("id", "options");
+    let choices = ["Dogs", "Cats", "Random"];
+    for (let i = 0; i < choices.length; i++) {
+        let choiceButton = document.createElement("button");
+        choiceButton.setAttribute("id", choices[i].toLowerCase());
+        choiceButton.innerHTML = choices[i];
+        choiceButton.addEventListener("click", changeGame);
+        userOptionsDiv.append(choiceButton);
+    };
+    header.append(userOptionsDiv);
+    document.body.prepend(header);
+
 }
-var options = document.getElementById("options");
-options.addEventListener("click", function (e) {
+
+function changeGame(e) {
     // console.log(e.target.id)
     let optionPicked = e.target.id;
     switch (optionPicked) {
         case "dogs":
             console.log("dogs");
+            makeGame();
             break;
         case "cats":
             console.log("cats");
@@ -212,7 +240,8 @@ options.addEventListener("click", function (e) {
             console.log("random");
             break;
     }
-});
+};
 //function to start the game
-makeGame();
+// makeGame();
+makeHeader();
 
