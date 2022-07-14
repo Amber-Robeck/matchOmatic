@@ -1,12 +1,15 @@
 #grid {
-    width: 400px;
+    /* width: 400px;
     height: 400px;
     display: flex;
-    flex-wrap: wrap;
-    /* display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 10px;
-    grid-auto-rows: minmax(100px, auto); */
+    flex-wrap: wrap; */
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 0.5rem;
+    grid-auto-rows: minmax(100px, auto);
+    /* justify-content: center; */
+    margin: auto;
 }
 
 .card {
