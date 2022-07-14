@@ -19,8 +19,10 @@ const dData = [
 ];
 let arr = [];
 let grid;
+let scorePoints = 0;
 let fetchData = [];
 let userChoice = [];
+
 
 
 //function to fetch random images of puppies and then push item twice into fetchData array
@@ -116,6 +118,9 @@ function turnCard() {
         console.log("checking for match");
         if (userChoice[0].name === userChoice[1].name) {
             console.log("match");
+            //to add if score ===4 then alert player won
+            scorePoints++;
+            document.getElementById("score").innerHTML = `Score: ${scorePoints}`;
             userChoice = [];
         }
         else {
