@@ -92,7 +92,7 @@ async function makeGame() {
     //create the grid
     grid = document.createElement("div");
     grid.setAttribute("id", "grid");
-    document.body.prepend(grid);
+    document.body.append(grid);
     //adding header with title and score elements
     // let header = document.createElement("header");
     // header.setAttribute("id", "header");
@@ -108,27 +108,19 @@ async function makeGame() {
     makeCard();
 };
 
-async function makeGameClone() {
+async function fetchPuppyData() {
     await callPuppy();
     await checkData();
     await mixArray(fetchData);
+    makeGrid();
+    makeCard();
+};
+
+function makeGrid() {
     //create the grid
     grid = document.createElement("div");
     grid.setAttribute("id", "grid");
-    document.body.prepend(grid);
-    //adding header with title and score elements
-    let header = document.createElement("header");
-    header.setAttribute("id", "header");
-    let title = document.createElement("h1");
-    title.setAttribute("id", "title");
-    title.innerHTML = "MatchOMatic";
-    header.append(title);
-    let score = document.createElement("div");
-    score.setAttribute("id", "score");
-    score.innerHTML = "Score: 0";
-    header.append(score);
-    document.body.prepend(header);
-    makeCard();
+    document.body.append(grid);
 };
 
 function makeCard() {
@@ -231,7 +223,7 @@ function changeGame(e) {
     switch (optionPicked) {
         case "dogs":
             console.log("dogs");
-            makeGame();
+            fetchPuppyData();
             break;
         case "cats":
             console.log("cats");
