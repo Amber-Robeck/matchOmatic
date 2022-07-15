@@ -43,7 +43,7 @@ let grid;
 let scorePoints = 0;
 let fetchData = [];
 let userChoice = [];
-
+let winningPairs = [];
 console.log(catData)
 
 //function to fetch random images of puppies and then push item twice into fetchData array
@@ -141,13 +141,11 @@ function makeCard() {
 //turning the card over by setting image by data-id
 function turnCard() {
     cardId = this.getAttribute("data-id");
-    // console.log(cardId);
-    // console.log(userChoice[0]?.id);
     //if card clicked is not the one already clicked
-    if (cardId !== userChoice[0]?.id) {
+    if (cardId !== userChoice[0]?.id && cardId !== userChoice[1]?.id) {
         //changes image to the picture from the array
         this.setAttribute("src", arr[cardId].img);
-        //If userChoice array is less, push the cardId to the array
+        //If userChoice array is less than 2, push the cardId to the array
         if (userChoice.length < 2) {
             userChoice.push({ id: cardId, name: arr[cardId].name });
         };
@@ -155,33 +153,67 @@ function turnCard() {
         //create checkMatch function to store these items
         //If userChoice array is equal to 2, run checkMatch function
         if (userChoice.length === 2) {
+            let choiceOne = document.querySelector('[data-id="' + userChoice[0].id + '"]');
+            let choiceTwo = document.querySelector('[data-id="' + userChoice[1].id + '"]');
+            let cards = document.querySelectorAll('.card');
+            // console.log(cards);
+            cards.forEach(card => {
+                card.removeEventListener("click", turnCard);
+            });
+            // choiceOne.removeEventListener("click", turnCard);
+            // choiceTwo.removeEventListener("click", turnCard);
             //alert disrupts gameplay would like to change to modal or display on page
             console.log("checking for match");
-            if (userChoice[0].name === userChoice[1].name) {
-                console.log("match");
-                //remove eventlistener from cards once matched
-                let choiceOne = document.querySelector('[data-id="' + userChoice[0].id + '"]');
-                choiceOne.removeEventListener("click", turnCard);
-                let choiceTwo = document.querySelector('[data-id="' + userChoice[1].id + '"]');
-                choiceTwo.removeEventListener("click", turnCard);
-
-                //to add if score ===4 then alert player won
-                scorePoints++;
-                document.getElementById("score").innerHTML = `Score: ${scorePoints}`;
-                userChoice = [];
-            }
-            else {
+            if (userChoice[0].name !== userChoice[1].name) {
                 console.log("no match");
                 //change cards back to background image
                 //timeout function to allow user to see the second card choice
                 setTimeout(function () {
                     console.log(userChoice[0].id, userChoice[1].id);
-                    let choice1 = document.querySelector('[data-id="' + userChoice[0].id + '"]');
-                    choice1.setAttribute("src", "./assets/images/background.png");
-                    let choice2 = document.querySelector('[data-id="' + userChoice[1].id + '"]');
-                    choice2.setAttribute("src", "./assets/images/background.png");
+                    choiceOne.setAttribute("src", "./assets/images/background.png");
+                    choiceTwo.setAttribute("src", "./assets/images/background.png");
+                    // choiceOne.addEventListener("click", turnCard);
+                    // choiceTwo.addEventListener("click", turnCard);
+                    cards.forEach(card => {
+                        card.addEventListener("click", turnCard);
+                    });
+                    // cards.addEventListener("click", turnCard);
                     userChoice = [];
                 }, 1500);
+            }
+            else {
+                console.log("match");
+
+                winningPairs.push(userChoice[0].id, userChoice[1].id);
+                console.log(winningPairs);
+
+                //Either of these blocks of code work until you click on the cards again
+                //remove eventlistener from cards once matched
+                cards.forEach(card12 => {
+                    if (winningPairs.includes(card12.getAttribute("data-id"))) {
+                        card12.removeEventListener("click", turnCard);
+                    } else {
+                        card12.addEventListener("click", turnCard);
+                    }
+                    // console.log(winningPairs.includes(card12.getAttribute("data-id")))
+                    // switch (card12) {
+                    //     case winningPairs.includes(card12.getAttribute("data-id")):
+                    //         card12.removeEventListener("click", turnCard);
+                    //         break;
+                    //     // default:
+                    //     //     card12.addEventListener("click", turnCard);
+                    //     //     break;
+                    // }
+                    // console.log(card12.getAttribute("data-id"));
+                    // console.log(choiceOne.getAttribute("data-id"), "choiceOne");
+                    // if (card12.getAttribute("data-id") !== choiceOne.getAttribute("data-id") || card12.getAttribute("data-id") !== choiceTwo.getAttribute("data-id")) {
+                    //     card12.addEventListener("click", turnCard);
+                    // };
+                });
+                //to add if score ===4 then alert player won
+                scorePoints++;
+                document.getElementById("score").innerHTML = `Score: ${scorePoints}`;
+                userChoice = [];
             }
         }
     } else {
@@ -222,6 +254,7 @@ async function clearData() {
     score.innerHTML = "Score: 0";
     scorePoints = 0;
     userChoice = [];
+    winningPairs = [];
     // const gridDisplay = document.getElementById('grid') || "";
     // // gridDisplay.innerHTML = "";
     // gridDisplay.remove();
