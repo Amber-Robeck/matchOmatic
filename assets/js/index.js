@@ -141,8 +141,9 @@ function makeCard() {
 //turning the card over by setting image by data-id
 function turnCard() {
     cardId = this.getAttribute("data-id");
-    console.log(cardId);
-    console.log(userChoice[0]?.id);
+    // console.log(cardId);
+    // console.log(userChoice[0]?.id);
+    //if card clicked is not the one already clicked
     if (cardId !== userChoice[0]?.id) {
         //changes image to the picture from the array
         this.setAttribute("src", arr[cardId].img);
@@ -158,6 +159,12 @@ function turnCard() {
             console.log("checking for match");
             if (userChoice[0].name === userChoice[1].name) {
                 console.log("match");
+                //remove eventlistener from cards once matched
+                let choiceOne = document.querySelector('[data-id="' + userChoice[0].id + '"]');
+                choiceOne.removeEventListener("click", turnCard);
+                let choiceTwo = document.querySelector('[data-id="' + userChoice[1].id + '"]');
+                choiceTwo.removeEventListener("click", turnCard);
+
                 //to add if score ===4 then alert player won
                 scorePoints++;
                 document.getElementById("score").innerHTML = `Score: ${scorePoints}`;
