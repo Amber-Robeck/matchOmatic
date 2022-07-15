@@ -43,7 +43,7 @@ let grid;
 let scorePoints = 0;
 let fetchData = [];
 let userChoice = [];
-
+let winningPairs = [];
 console.log(catData)
 
 //function to fetch random images of puppies and then push item twice into fetchData array
@@ -77,6 +77,7 @@ function mixArray(array) {
 
 //function to run the dog fetch 4 times
 async function callPuppy() {
+    fetchData = [];
     for (let i = 0; i < 4; i++) {
         await fetchPuppy()
     };
@@ -84,21 +85,29 @@ async function callPuppy() {
 };
 
 async function fetchPuppyData() {
+    await clearData();
     await callPuppy();
     await checkData();
     await mixArray(fetchData);
+    //clears grid before creating new grid for button to button clicking bug
     makeGrid();
     makeCard();
 };
 
-function fetchKittenData() {
+async function fetchKittenData() {
+    //clears grid before creating new grid for button to button clicking bug
+    await clearData();
+    arr = [];
     arr = catData.concat(catData);
     mixArray(arr);
     makeGrid();
     makeCard();
 };
 
-function fetchRandomData() {
+async function fetchRandomData() {
+    //clears grid before creating new grid for button to button clicking bug
+    await clearData();
+    arr = [];
     arr = dData
     mixArray(arr);
     makeGrid();
@@ -106,6 +115,8 @@ function fetchRandomData() {
 }
 
 function makeGrid() {
+    // //clears grid before creating new grid for button to button clicking bug
+    // clearGrid();
     //create the grid
     grid = document.createElement("div");
     grid.setAttribute("id", "grid");
@@ -130,38 +141,64 @@ function makeCard() {
 //turning the card over by setting image by data-id
 function turnCard() {
     cardId = this.getAttribute("data-id");
-    //changes image to the picture from the array
-    this.setAttribute("src", arr[cardId].img);
-    //If userChoice array is less, push the cardId to the array
-    if (userChoice.length < 2) {
-        userChoice.push({ id: cardId, name: arr[cardId].name });
-    };
-    //if I use else if, this condition doesn't run until there are three cards Perhaps change to switch for long term
-    //create checkMatch function to store these items
-    //If userChoice array is equal to 2, run checkMatch function
-    if (userChoice.length === 2) {
-        //alert disrupts gameplay would like to change to modal or display on page
-        console.log("checking for match");
-        if (userChoice[0].name === userChoice[1].name) {
-            console.log("match");
-            //to add if score ===4 then alert player won
-            scorePoints++;
-            document.getElementById("score").innerHTML = `Score: ${scorePoints}`;
-            userChoice = [];
-        }
-        else {
-            console.log("no match");
-            //change cards back to background image
-            //timeout function to allow user to see the second card choice
-            setTimeout(function () {
-                console.log(userChoice[0].id, userChoice[1].id);
-                let choice1 = document.querySelector('[data-id="' + userChoice[0].id + '"]');
-                choice1.setAttribute("src", "./assets/images/background.png");
-                let choice2 = document.querySelector('[data-id="' + userChoice[1].id + '"]');
-                choice2.setAttribute("src", "./assets/images/background.png");
+    //if card clicked is not the one already clicked
+    if (cardId !== userChoice[0]?.id && cardId !== userChoice[1]?.id) {
+        //changes image to the picture from the array
+        this.setAttribute("src", arr[cardId].img);
+        //If userChoice array is less than 2, push the cardId to the array
+        if (userChoice.length < 2) {
+            userChoice.push({ id: cardId, name: arr[cardId].name });
+        };
+        //if I use else if, this condition doesn't run until there are three cards Perhaps change to switch for long term
+        //create checkMatch function to store these items
+        //If userChoice array is equal to 2, run checkMatch function
+        if (userChoice.length === 2) {
+            let choiceOne = document.querySelector('[data-id="' + userChoice[0].id + '"]');
+            let choiceTwo = document.querySelector('[data-id="' + userChoice[1].id + '"]');
+            let cards = document.querySelectorAll('.card');
+            //remove event listener from cards so they can't be clicked during validation
+            cards.forEach(card => {
+                card.removeEventListener("click", turnCard);
+            });
+            //alert disrupts gameplay would like to change to modal or display on page
+            console.log("checking for match");
+            if (userChoice[0].name !== userChoice[1].name) {
+                console.log("no match");
+                //change cards back to background image
+                //timeout function to allow user to see the second card choice
+                setTimeout(function () {
+                    console.log(userChoice[0].id, userChoice[1].id);
+                    choiceOne.setAttribute("src", "./assets/images/background.png");
+                    choiceTwo.setAttribute("src", "./assets/images/background.png");
+                    //no match returns event listener
+                    //need to check to make sure not in winning pair array
+                    cards.forEach(card => {
+                        card.addEventListener("click", turnCard);
+                    });
+                    userChoice = [];
+                }, 1500);
+            }
+            else {
+                console.log("match");
+                //push winning pairs into array to compare for event listener
+                winningPairs.push(userChoice[0].id, userChoice[1].id);
+
+                //remove eventlistener from cards once matched
+                cards.forEach(card12 => {
+                    if (winningPairs.includes(card12.getAttribute("data-id"))) {
+                        card12.removeEventListener("click", turnCard);
+                    } else {
+                        card12.addEventListener("click", turnCard);
+                    }
+                });
+                //to add if score ===4 then alert player won
+                scorePoints++;
+                document.getElementById("score").innerHTML = `Score: ${scorePoints}`;
                 userChoice = [];
-            }, 1500);
+            }
         }
+    } else {
+        console.log("already chosen");
     }
 };
 
@@ -189,8 +226,17 @@ function makeHeader() {
     };
     header.append(userOptionsDiv);
     document.body.prepend(header);
+};
 
-}
+async function clearData() {
+    if (document.getElementById('grid')) {
+        grid.remove();
+    }
+    score.innerHTML = "Score: 0";
+    scorePoints = 0;
+    userChoice = [];
+    winningPairs = [];
+};
 
 function changeGame(e) {
     // console.log(e.target.id)
