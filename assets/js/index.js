@@ -64,48 +64,23 @@ async function fetchPuppy() {
         .catch(err => console.log(err));
 };
 
-
-
-
-
-
+//Checking to see if data exists otherwise use default data
 async function checkData() {
     fetchData.length ? arr = fetchData : arr = dData;
     return arr;
 };
 
+//function to mix the array
 function mixArray(array) {
     return array.sort(() => 0.5 - Math.random());
 };
 
+//function to run the dog fetch 4 times
 async function callPuppy() {
     for (let i = 0; i < 4; i++) {
         await fetchPuppy()
     };
     return fetchData;
-};
-
-async function makeGame() {
-    await callPuppy();
-    await checkData();
-    await mixArray(fetchData);
-    //create the grid
-    grid = document.createElement("div");
-    grid.setAttribute("id", "grid");
-    document.body.append(grid);
-    //adding header with title and score elements
-    // let header = document.createElement("header");
-    // header.setAttribute("id", "header");
-    // let title = document.createElement("h1");
-    // title.setAttribute("id", "title");
-    // title.innerHTML = "MatchOMatic";
-    // header.append(title);
-    // let score = document.createElement("div");
-    // score.setAttribute("id", "score");
-    // score.innerHTML = "Score: 0";
-    // header.append(score);
-    // document.body.prepend(header);
-    makeCard();
 };
 
 async function fetchPuppyData() {
@@ -143,22 +118,8 @@ function makeCard() {
         card.addEventListener("click", turnCard);
         grid.appendChild(card);
     };
-
-    //testing cat data
-    // for (let i = 0; i < catData.length; i++) {
-    //     let card = document.createElement("img");
-    //     card.setAttribute("class", "card");
-    //     //this can't be used or players can find from inspecting the page
-    //     // card.setAttribute("data-name", dData[i].name);
-    //     card.setAttribute("data-id", i);
-    //     //Set to background image for start of game play
-    //     card.setAttribute("src", catData[i].img);
-    //     // card.setAttribute("src", "./assets/images/background.png");
-    //     card.addEventListener("click", turnCard);
-    //     grid.appendChild(card);
-    // };
-
 };
+
 //turning the card over by setting image by data-id
 function turnCard() {
     cardId = this.getAttribute("data-id");
