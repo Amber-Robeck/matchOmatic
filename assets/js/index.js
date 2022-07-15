@@ -116,6 +116,13 @@ async function fetchPuppyData() {
     makeCard();
 };
 
+function fetchKittenData() {
+    arr = catData.concat(catData);
+    mixArray(arr);
+    makeGrid();
+    makeCard();
+};
+
 function makeGrid() {
     //create the grid
     grid = document.createElement("div");
@@ -227,13 +234,13 @@ function changeGame(e) {
             break;
         case "cats":
             console.log("cats");
+            fetchKittenData();
             break;
         case "random":
             console.log("random");
             break;
     }
 };
-//function to start the game
-// makeGame();
+//function to create the header allowing user to choose game type
 makeHeader();
 
