@@ -156,12 +156,10 @@ function turnCard() {
             let choiceOne = document.querySelector('[data-id="' + userChoice[0].id + '"]');
             let choiceTwo = document.querySelector('[data-id="' + userChoice[1].id + '"]');
             let cards = document.querySelectorAll('.card');
-            // console.log(cards);
+            //remove event listener from cards so they can't be clicked during validation
             cards.forEach(card => {
                 card.removeEventListener("click", turnCard);
             });
-            // choiceOne.removeEventListener("click", turnCard);
-            // choiceTwo.removeEventListener("click", turnCard);
             //alert disrupts gameplay would like to change to modal or display on page
             console.log("checking for match");
             if (userChoice[0].name !== userChoice[1].name) {
@@ -172,22 +170,19 @@ function turnCard() {
                     console.log(userChoice[0].id, userChoice[1].id);
                     choiceOne.setAttribute("src", "./assets/images/background.png");
                     choiceTwo.setAttribute("src", "./assets/images/background.png");
-                    // choiceOne.addEventListener("click", turnCard);
-                    // choiceTwo.addEventListener("click", turnCard);
+                    //no match returns event listener
+                    //need to check to make sure not in winning pair array
                     cards.forEach(card => {
                         card.addEventListener("click", turnCard);
                     });
-                    // cards.addEventListener("click", turnCard);
                     userChoice = [];
                 }, 1500);
             }
             else {
                 console.log("match");
-
+                //push winning pairs into array to compare for event listener
                 winningPairs.push(userChoice[0].id, userChoice[1].id);
-                console.log(winningPairs);
 
-                //Either of these blocks of code work until you click on the cards again
                 //remove eventlistener from cards once matched
                 cards.forEach(card12 => {
                     if (winningPairs.includes(card12.getAttribute("data-id"))) {
@@ -195,20 +190,6 @@ function turnCard() {
                     } else {
                         card12.addEventListener("click", turnCard);
                     }
-                    // console.log(winningPairs.includes(card12.getAttribute("data-id")))
-                    // switch (card12) {
-                    //     case winningPairs.includes(card12.getAttribute("data-id")):
-                    //         card12.removeEventListener("click", turnCard);
-                    //         break;
-                    //     // default:
-                    //     //     card12.addEventListener("click", turnCard);
-                    //     //     break;
-                    // }
-                    // console.log(card12.getAttribute("data-id"));
-                    // console.log(choiceOne.getAttribute("data-id"), "choiceOne");
-                    // if (card12.getAttribute("data-id") !== choiceOne.getAttribute("data-id") || card12.getAttribute("data-id") !== choiceTwo.getAttribute("data-id")) {
-                    //     card12.addEventListener("click", turnCard);
-                    // };
                 });
                 //to add if score ===4 then alert player won
                 scorePoints++;
@@ -255,9 +236,6 @@ async function clearData() {
     scorePoints = 0;
     userChoice = [];
     winningPairs = [];
-    // const gridDisplay = document.getElementById('grid') || "";
-    // // gridDisplay.innerHTML = "";
-    // gridDisplay.remove();
 };
 
 function changeGame(e) {
