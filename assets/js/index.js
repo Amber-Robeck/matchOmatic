@@ -77,6 +77,7 @@ function mixArray(array) {
 
 //function to run the dog fetch 4 times
 async function callPuppy() {
+    fetchData = [];
     for (let i = 0; i < 4; i++) {
         await fetchPuppy()
     };
@@ -84,21 +85,29 @@ async function callPuppy() {
 };
 
 async function fetchPuppyData() {
+    await clearData();
     await callPuppy();
     await checkData();
     await mixArray(fetchData);
+    //clears grid before creating new grid for button to button clicking bug
     makeGrid();
     makeCard();
 };
 
-function fetchKittenData() {
+async function fetchKittenData() {
+    //clears grid before creating new grid for button to button clicking bug
+    await clearData();
+    arr = [];
     arr = catData.concat(catData);
     mixArray(arr);
     makeGrid();
     makeCard();
 };
 
-function fetchRandomData() {
+async function fetchRandomData() {
+    //clears grid before creating new grid for button to button clicking bug
+    await clearData();
+    arr = [];
     arr = dData
     mixArray(arr);
     makeGrid();
@@ -106,6 +115,8 @@ function fetchRandomData() {
 }
 
 function makeGrid() {
+    // //clears grid before creating new grid for button to button clicking bug
+    // clearGrid();
     //create the grid
     grid = document.createElement("div");
     grid.setAttribute("id", "grid");
@@ -189,8 +200,19 @@ function makeHeader() {
     };
     header.append(userOptionsDiv);
     document.body.prepend(header);
+};
 
-}
+async function clearData() {
+    if (document.getElementById('grid')) {
+        grid.remove();
+    }
+    score.innerHTML = "Score: 0";
+    scorePoints = 0;
+    userChoice = [];
+    // const gridDisplay = document.getElementById('grid') || "";
+    // // gridDisplay.innerHTML = "";
+    // gridDisplay.remove();
+};
 
 function changeGame(e) {
     // console.log(e.target.id)
