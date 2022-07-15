@@ -98,6 +98,13 @@ function fetchKittenData() {
     makeCard();
 };
 
+function fetchRandomData() {
+    arr = dData
+    mixArray(arr);
+    makeGrid();
+    makeCard();
+}
+
 function makeGrid() {
     //create the grid
     grid = document.createElement("div");
@@ -199,6 +206,7 @@ function changeGame(e) {
             break;
         case "random":
             console.log("random");
+            fetchRandomData();
             break;
     }
 };
