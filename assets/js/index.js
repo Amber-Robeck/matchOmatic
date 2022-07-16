@@ -85,13 +85,14 @@ async function callPuppy() {
 };
 
 async function fetchPuppyData() {
+    //clears grid before creating new grid for button to button clicking bug
     await clearData();
     await callPuppy();
     await checkData();
-    await mixArray(fetchData);
-    //clears grid before creating new grid for button to button clicking bug
-    makeGrid();
-    makeCard();
+    mixAndMake(fetchData);
+    // await mixArray(fetchData);
+    // makeGrid();
+    // makeCard();
 };
 
 async function fetchKittenData() {
@@ -99,17 +100,23 @@ async function fetchKittenData() {
     await clearData();
     arr = [];
     arr = catData.concat(catData);
-    mixArray(arr);
-    makeGrid();
-    makeCard();
+    mixAndMake(arr);
+    // mixArray(arr);
+    // makeGrid();
+    // makeCard();
 };
 
 async function fetchRandomData() {
     //clears grid before creating new grid for button to button clicking bug
     await clearData();
-    arr = [];
     arr = dData
-    mixArray(arr);
+    mixAndMake(arr);
+    // mixArray(arr);
+    // makeGrid();
+    // makeCard();
+};
+function mixAndMake(array) {
+    mixArray(array);
     makeGrid();
     makeCard();
 }
@@ -236,6 +243,7 @@ async function clearData() {
     scorePoints = 0;
     userChoice = [];
     winningPairs = [];
+    arr = [];
 };
 
 function changeGame(e) {
