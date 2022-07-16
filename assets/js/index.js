@@ -85,13 +85,12 @@ async function callPuppy() {
 };
 
 async function fetchPuppyData() {
+    //clears grid before creating new grid for button to button clicking bug
     await clearData();
     await callPuppy();
     await checkData();
-    await mixArray(fetchData);
-    //clears grid before creating new grid for button to button clicking bug
-    makeGrid();
-    makeCard();
+    //still unsure about this not being async, first time wasn't shuffled but after that every time it was
+    mixAndMake(fetchData);
 };
 
 async function fetchKittenData() {
@@ -99,24 +98,22 @@ async function fetchKittenData() {
     await clearData();
     arr = [];
     arr = catData.concat(catData);
-    mixArray(arr);
-    makeGrid();
-    makeCard();
+    mixAndMake(arr);
 };
 
 async function fetchRandomData() {
     //clears grid before creating new grid for button to button clicking bug
     await clearData();
-    arr = [];
     arr = dData
-    mixArray(arr);
+    mixAndMake(arr);
+};
+function mixAndMake(array) {
+    mixArray(array);
     makeGrid();
     makeCard();
 }
 
 function makeGrid() {
-    // //clears grid before creating new grid for button to button clicking bug
-    // clearGrid();
     //create the grid
     grid = document.createElement("div");
     grid.setAttribute("id", "grid");
@@ -236,6 +233,7 @@ async function clearData() {
     scorePoints = 0;
     userChoice = [];
     winningPairs = [];
+    arr = [];
 };
 
 function changeGame(e) {
