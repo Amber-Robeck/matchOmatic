@@ -201,6 +201,7 @@ function turnCard() {
 
                     console.log(winnerAmmount)
                     console.log('You win!')
+                    document.getElementById("score").innerHTML = ` YOU WIN with a score of ${scorePoints}!!!`;
                 }
             }
         }
