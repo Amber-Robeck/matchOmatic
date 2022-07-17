@@ -189,9 +189,20 @@ function turnCard() {
                     }
                 });
                 //to add if score ===4 then alert player won
+                let winnerAmmount = document.querySelectorAll('.card').length / 2
+                if (scorePoints === winnerAmmount) {
+
+                    console.log(winnerAmmount)
+                }
                 scorePoints++;
                 document.getElementById("score").innerHTML = `Score: ${scorePoints}`;
                 userChoice = [];
+                if (scorePoints === winnerAmmount) {
+
+                    console.log(winnerAmmount)
+                    console.log('You win!')
+                    document.getElementById("score").innerHTML = ` YOU WIN with a score of ${scorePoints}!!!`;
+                }
             }
         }
     } else {
