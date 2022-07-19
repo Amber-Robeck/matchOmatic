@@ -33,3 +33,8 @@ button {
     height: 200px;
 
 }
+
+.winner {
+    font-size: 3rem;
+    background-color: lightgrey;
+}

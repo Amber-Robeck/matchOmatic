@@ -107,11 +107,12 @@ async function fetchRandomData() {
     arr = dData
     mixAndMake(arr);
 };
+
 function mixAndMake(array) {
     mixArray(array);
     makeGrid();
     makeCard();
-}
+};
 
 function makeGrid() {
     //create the grid
@@ -125,8 +126,6 @@ function makeCard() {
     for (let i = 0; i < arr.length; i++) {
         let card = document.createElement("img");
         card.setAttribute("class", "card");
-        //this can't be used or players can find from inspecting the page
-        // card.setAttribute("data-name", dData[i].name);
         card.setAttribute("data-id", i);
         //Set to background image for start of game play
         card.setAttribute("src", "./assets/images/background.png");
@@ -174,8 +173,7 @@ function turnCard() {
                     });
                     userChoice = [];
                 }, 1500);
-            }
-            else {
+            } else {
                 console.log("match");
                 //push winning pairs into array to compare for event listener
                 winningPairs.push(userChoice[0].id, userChoice[1].id);
@@ -188,26 +186,29 @@ function turnCard() {
                         card12.addEventListener("click", turnCard);
                     }
                 });
-                //to add if score ===4 then alert player won
+                //calculate if all matches were found and you win message
                 let winnerAmmount = document.querySelectorAll('.card').length / 2
                 if (scorePoints === winnerAmmount) {
 
                     console.log(winnerAmmount)
                 }
                 scorePoints++;
-                document.getElementById("score").innerHTML = `Score: ${scorePoints}`;
+                let newScoreDisplay = document.getElementById("score");
+                // document.getElementById("score").innerHTML = `Score: ${scorePoints}`;
+                newScoreDisplay.innerHTML = `Score: ${scorePoints}`;
                 userChoice = [];
                 if (scorePoints === winnerAmmount) {
 
                     console.log(winnerAmmount)
-                    console.log('You win!')
-                    document.getElementById("score").innerHTML = ` YOU WIN with a score of ${scorePoints}!!!`;
-                }
-            }
-        }
+                    console.log('You win!');
+                    newScoreDisplay.setAttribute('class', 'winner')
+                    newScoreDisplay.innerHTML = ` YOU WIN with a score of ${scorePoints}!!!`;
+                };
+            };
+        };
     } else {
         console.log("already chosen");
-    }
+    };
 };
 
 
@@ -247,8 +248,8 @@ async function clearData() {
     arr = [];
 };
 
+//function to change game based on button click
 function changeGame(e) {
-    // console.log(e.target.id)
     let optionPicked = e.target.id;
     switch (optionPicked) {
         case "dogs":
@@ -265,6 +266,7 @@ function changeGame(e) {
             break;
     }
 };
+
 //function to create the header allowing user to choose game type
 makeHeader();
 
