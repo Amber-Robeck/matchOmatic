@@ -219,6 +219,10 @@ function makeHeader() {
     title.setAttribute("id", "title");
     title.innerHTML = "MatchOMatic";
     header.append(title);
+    let message = document.createElement("p");
+    message.setAttribute("id", "message");
+    message.innerHTML = "Select a choice to start matching"
+    header.append(message);
     let score = document.createElement("div");
     score.setAttribute("id", "score");
     score.innerHTML = "Score: 0";
@@ -242,6 +246,7 @@ async function clearData() {
         grid.remove();
     }
     score.innerHTML = "Score: 0";
+    score.removeAttribute("class", "winner")
     scorePoints = 0;
     userChoice = [];
     winningPairs = [];

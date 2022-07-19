@@ -1,3 +1,4 @@
+/* beginning off header stylings */
 #header {
     padding: .5rem;
     text-align: center;
@@ -14,27 +15,37 @@ button {
     width: 10%;
 }
 
+#message {
+    font-weight: 500;
+}
+
+#score {
+    font-size: 1.7rem;
+}
+
+/* end of header stylings */
+
 #grid {
-    /* width: 400px;
-    height: 400px;
-    display: flex;
-    flex-wrap: wrap; */
     max-width: 1000px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     grid-gap: 0.5rem;
     grid-auto-rows: minmax(100px, auto);
-    /* justify-content: center; */
     margin: auto;
+    justify-content: center;
 }
 
 .card {
     width: 200px;
     height: 200px;
+    margin: auto;
 
 }
 
+/* class for when player wins */
 .winner {
     font-size: 3rem;
+    width: 50%;
+    margin: auto;
     background-color: lightgrey;
 }
