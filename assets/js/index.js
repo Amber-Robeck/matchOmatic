@@ -197,6 +197,7 @@ function turnCard() {
 
                     console.log(winnerAmmount)
                     console.log('You win!');
+                    makeModal();
                     newScoreDisplay.setAttribute('class', 'winner')
                     newScoreDisplay.innerHTML = ` YOU WIN with a score of ${scorePoints}!!!`;
                 };
@@ -237,6 +238,24 @@ function makeHeader() {
     document.body.prepend(header);
 };
 
+function makeModal() {
+    let modal = document.createElement("div");
+    modal.setAttribute("id", "modal");
+    let modalContent = document.createElement("div");
+    modalContent.setAttribute("id", "modalContent");
+    let modalMessage = document.createElement("p");
+    modalMessage.setAttribute("id", "modalMessage");
+    modalMessage.innerHTML = "You win!";
+    modalContent.append(modalMessage);
+    let modalButton = document.createElement("button");
+    modalButton.setAttribute("id", "modalButton");
+    modalButton.innerHTML = "Play Again";
+    modalButton.addEventListener("click", clearData);
+    modalContent.append(modalButton);
+    modal.append(modalContent);
+    grid.append(modal);
+};
+
 //clears all data from the grid to fix button click issue
 async function clearData() {
     if (document.getElementById('grid')) {
@@ -272,3 +291,11 @@ function changeGame(e) {
 //function to create the header allowing user to choose game type
 makeHeader();
 
+//TODO:
+//add reset button to reset game
+//add animation to cards flipping over
+//add sound to cards flipping over
+//add local storage to save high score
+//add header to let user know what they chose/what game they are playing
+//let user know match or no match
+//add a tries verses matches for high score
