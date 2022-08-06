@@ -9,7 +9,7 @@
 
  ## Description
 
-_Welcome to MatchOMatic, a friendly matching game where a user can pick what types of pictures they would like to match from multiple different api's/datasets. Currently this application is only set up to retrieve data from the DOG API._ 
+_Welcome to MatchOMatic, a friendly matching game where a user can pick what types of pictures they would like to match from multiple different api's/datasets. Currently this application is set up to retrieve data from the [DOG API](https://dog.ceo/dog-api/ "DOG link") as well as the [CATS AS A SERVICE (CATAAS) API](https://cataas.com/#/ "CATAAS link")._ 
 
 
 This application:
@@ -21,7 +21,6 @@ This application:
   
   - [Usage](#usage)
   - [Installation](#installation)
-  - [Walk-through video](#walk-through)
   - [Screenshots](#screenshots)
   - [License](#license)
   - [Contributions](#how-to-contribute)
@@ -33,6 +32,11 @@ This application:
 
 Currently this application is able to:
 * Retrieve data from the [DOG API](https://dog.ceo/dog-api/ "DOG API") and display the pictures as cards.
+* Retrieve data from the [CATS AS A SERVICE (CATAAS) API](https://cataas.com/#/ "CATAAS API") and display the pictures as cards.
+* Load random data set of images if player chooses random.
+* Match the pictures by clicking on the cards.
+* Display the number of matches made as a score.
+* Let User know they won the game if they have matched all the cards.
 
 
 
@@ -46,15 +50,6 @@ This project is deployed on [GitHub Pages](https://amber-robeck.github.io/matchO
 
   ---
 
-  ## Walk-through
- 
- Currently there is no walkthrough video of this application.
-
-
-[link to whole video.]( "Whole walkthrough video")
-
-
- ---
 
   ## Screenshots
 
