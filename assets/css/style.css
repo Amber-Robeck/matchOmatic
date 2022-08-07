@@ -94,9 +94,10 @@ button {
     cursor: pointer;
     width: 10%;
 }
-    background-color: darkgray;
+
+/* background-color: darkgray;
     color: white;
-}
+} */
 
 @media screen and (max-width: 600px) {
     #title {
