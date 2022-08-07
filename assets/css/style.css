@@ -134,6 +134,12 @@ button {
         width: 100px;
         height: 100px;
     }
-}
 
-;
+    #modalMessage {
+        font-size: 1.5rem;
+    }
+
+    #modalButton {
+        width: 25%;
+    }
+}
