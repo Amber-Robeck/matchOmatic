@@ -197,7 +197,7 @@ function turnCard() {
 
                     console.log(winnerAmmount)
                     console.log('You win!');
-                    makeModal();
+                    makeModal(scorePoints);
                     newScoreDisplay.setAttribute('class', 'winner')
                     newScoreDisplay.innerHTML = ` YOU WIN with a score of ${scorePoints}!!!`;
                 };
@@ -238,14 +238,14 @@ function makeHeader() {
     document.body.prepend(header);
 };
 
-function makeModal() {
+function makeModal(score) {
     let modal = document.createElement("div");
     modal.setAttribute("id", "modal");
     let modalContent = document.createElement("div");
     modalContent.setAttribute("id", "modalContent");
     let modalMessage = document.createElement("p");
     modalMessage.setAttribute("id", "modalMessage");
-    modalMessage.innerHTML = "You win!";
+    modalMessage.innerHTML = ` YOU WIN with a score of ${score}!!!`;
     modalContent.append(modalMessage);
     let modalButton = document.createElement("button");
     modalButton.setAttribute("id", "modalButton");
