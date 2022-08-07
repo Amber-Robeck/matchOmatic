@@ -1,4 +1,4 @@
-//random pictures if api call fails
+//random pictures if api call fails or user chooses random
 const dData = [
     {
         name: "gZilla",
@@ -18,7 +18,7 @@ const dData = [
     }
 ];
 
-//While this does return 4 different images due to adding different params, it does not change images often like the puppy api
+//Retrieve cat data from api
 catUrl = "https://cataas.com/cat";
 const catData = [
     {
@@ -44,7 +44,6 @@ let scorePoints = 0;
 let fetchData = [];
 let userChoice = [];
 let winningPairs = [];
-console.log(catData)
 
 //function to fetch random images of puppies and then push item twice into fetchData array
 async function fetchPuppy() {
@@ -85,7 +84,6 @@ async function callPuppy() {
 };
 
 async function fetchPuppyData() {
-    //clears grid before creating new grid for button to button clicking bug
     await clearData();
     await callPuppy();
     await checkData();
@@ -94,7 +92,6 @@ async function fetchPuppyData() {
 };
 
 async function fetchKittenData() {
-    //clears grid before creating new grid for button to button clicking bug
     await clearData();
     arr = [];
     arr = catData.concat(catData);
@@ -102,7 +99,6 @@ async function fetchKittenData() {
 };
 
 async function fetchRandomData() {
-    //clears grid before creating new grid for button to button clicking bug
     await clearData();
     arr = dData
     mixAndMake(arr);
@@ -198,11 +194,7 @@ function turnCard() {
                 newScoreDisplay.innerHTML = `Score: ${scorePoints}`;
                 userChoice = [];
                 if (scorePoints === winnerAmmount) {
-
-                    console.log(winnerAmmount)
-                    console.log('You win!');
-                    newScoreDisplay.setAttribute('class', 'winner')
-                    newScoreDisplay.innerHTML = ` YOU WIN with a score of ${scorePoints}!!!`;
+                    makeModal(scorePoints);
                 };
             };
         };
@@ -211,7 +203,7 @@ function turnCard() {
     };
 };
 
-
+//creating header and score
 function makeHeader() {
     let header = document.createElement("header");
     header.setAttribute("id", "header");
@@ -241,6 +233,27 @@ function makeHeader() {
     document.body.prepend(header);
 };
 
+
+//Modal for winning message
+function makeModal(score) {
+    let modal = document.createElement("div");
+    modal.setAttribute("id", "modal");
+    let modalContent = document.createElement("div");
+    modalContent.setAttribute("id", "modalContent");
+    let modalMessage = document.createElement("p");
+    modalMessage.setAttribute("id", "modalMessage");
+    modalMessage.innerHTML = ` YOU WIN with a score of ${score}!!!`;
+    modalContent.append(modalMessage);
+    let modalButton = document.createElement("button");
+    modalButton.setAttribute("id", "modalButton");
+    modalButton.innerHTML = "Play Again";
+    modalButton.addEventListener("click", clearData);
+    modalContent.append(modalButton);
+    modal.append(modalContent);
+    grid.append(modal);
+};
+
+//clears all data from the grid to fix button click issue
 async function clearData() {
     if (document.getElementById('grid')) {
         grid.remove();
@@ -275,3 +288,11 @@ function changeGame(e) {
 //function to create the header allowing user to choose game type
 makeHeader();
 
+//TODO:
+//add reset button to reset game
+//add animation to cards flipping over
+//add sound to cards flipping over
+//add local storage to save high score
+//add header to let user know what they chose/what game they are playing
+//let user know match or no match
+//add a tries verses matches for high score
