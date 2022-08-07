@@ -1,3 +1,7 @@
+body {
+    background-color: lightgray;
+}
+
 /* beginning off header stylings */
 #header {
     padding: .5rem;
@@ -90,3 +94,45 @@ button {
     cursor: pointer;
     width: 10%;
 }
+    background-color: darkgray;
+    color: white;
+}
+
+@media screen and (max-width: 600px) {
+    #title {
+        padding: 0;
+        /* font-size: 0.95rem; */
+    }
+
+    #message {
+        font-weight: 300;
+        font-size: .85rem;
+    }
+
+    #score {
+        font-size: 1rem;
+    }
+
+    .winner {
+        font-size: 1.5rem;
+        width: 75%;
+        /* margin: auto;
+        background-color: darkgray;
+        color: white; */
+    }
+
+    button {
+        width: 25%;
+    }
+
+    #grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+
+    .card {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+;
