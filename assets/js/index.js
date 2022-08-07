@@ -130,6 +130,28 @@ function makeCard() {
     };
 };
 
+function makeFlippableCard() {
+    //create the cards and append to grid
+    for (let i = 0; i < arr.length; i++) {
+        let cardFront = document.createElement("img");
+        cardFront.setAttribute("class", "card front");
+        cardFront.setAttribute("data-id", i + 4);
+        //Set to background image for start of game play
+        cardFront.setAttribute("src", "./assets/images/background.png");
+        cardFront.addEventListener("click", turnCard);
+        grid.appendChild(cardFront);
+    };
+    for (let i = 0; i < arr.length; i++) {
+        let cardBack = document.createElement("img");
+        cardBack.setAttribute("class", "card back");
+        cardBack.setAttribute("data-id", i + 4);
+        //Set to background image for start of game play
+        cardBack.setAttribute("src", "./assets/images/background.png");
+        // cardBack.addEventListener("click", turnCard);
+        grid.appendChild(cardBack);
+    };
+};
+
 //turning the card over by setting image by data-id
 function turnCard() {
     cardId = this.getAttribute("data-id");

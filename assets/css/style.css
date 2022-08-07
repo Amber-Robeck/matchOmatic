@@ -44,7 +44,21 @@ button {
     width: 200px;
     height: 200px;
     margin: auto;
+}
 
+.front {
+    z-index: 2;
+    backface-visibility: hidden;
+}
+
+.back {
+    z-index: 1;
+    backface-visibility: hidden;
+}
+
+.card:active {
+    transform: scale(1.1);
+    /* transform: rotateY(180deg); */
 }
 
 /* ----------------End of Grid stylings------------ */
