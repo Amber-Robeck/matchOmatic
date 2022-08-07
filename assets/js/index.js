@@ -190,7 +190,6 @@ function turnCard() {
                 }
                 scorePoints++;
                 let newScoreDisplay = document.getElementById("score");
-                // document.getElementById("score").innerHTML = `Score: ${scorePoints}`;
                 newScoreDisplay.innerHTML = `Score: ${scorePoints}`;
                 userChoice = [];
                 if (scorePoints === winnerAmmount) {
