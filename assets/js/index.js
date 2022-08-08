@@ -180,7 +180,6 @@ function turnCard() {
             if (userChoice[0].name !== userChoice[1].name) {
                 console.log("no match");
                 numberOfGuesses++;
-                // console.log(numberOfGuesses);
                 //change cards back to background image
                 //timeout function to allow user to see the second card choice
                 setTimeout(function () {
@@ -199,7 +198,6 @@ function turnCard() {
                 //push winning pairs into array to compare for event listener
                 winningPairs.push(userChoice[0].id, userChoice[1].id);
                 numberOfGuesses++;
-                // console.log(numberOfGuesses);
                 //remove eventlistener from cards once matched
                 cards.forEach(card12 => {
                     if (winningPairs.includes(card12.getAttribute("data-id"))) {
@@ -215,8 +213,8 @@ function turnCard() {
                     console.log(winnerAmmount)
                 }
                 correctMatches++;
-                let newScoreDisplay = document.getElementById("score");
-                newScoreDisplay.innerHTML = `Matches: ${correctMatches}`;
+                let newMatchDisplay = document.getElementById("matches");
+                newMatchDisplay.innerHTML = `Matches: ${correctMatches}`;
                 userChoice = [];
                 if (correctMatches === winnerAmmount) {
                     let finalScore = (correctMatches * 10) + winnerAmmount - numberOfGuesses;
@@ -244,10 +242,10 @@ function makeHeader() {
     message.setAttribute("id", "message");
     message.innerHTML = "Select a choice to start matching"
     header.append(message);
-    let score = document.createElement("div");
-    score.setAttribute("id", "score");
-    score.innerHTML = "Matches: 0";
-    header.append(score);
+    let matches = document.createElement("div");
+    matches.setAttribute("id", "matches");
+    matches.innerHTML = "Matches: 0";
+    header.append(matches);
     let userOptionsDiv = document.createElement("div");
     userOptionsDiv.setAttribute("id", "options");
     let choices = ["Dogs", "Cats", "Random"];
@@ -287,8 +285,8 @@ async function clearData() {
     if (document.getElementById('grid')) {
         grid.remove();
     }
-    score.innerHTML = "Matches: 0";
-    score.removeAttribute("class", "winner")
+    matches.innerHTML = "Matches: 0";
+    // matches.removeAttribute("class", "winner")
     correctMatches = 0;
     numberOfGuesses = 0;
     userChoice = [];
