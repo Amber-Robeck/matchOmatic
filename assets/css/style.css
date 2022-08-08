@@ -23,7 +23,7 @@ button {
     font-weight: 500;
 }
 
-#score {
+#matches {
     font-size: 1.7rem;
 }
 
@@ -125,7 +125,7 @@ button {
         font-size: .85rem;
     }
 
-    #score {
+    #matches {
         font-size: 1rem;
     }
 
