@@ -40,7 +40,8 @@ const catData = [
 ];
 let arr = [];
 let grid;
-let scorePoints = 0;
+let correctMatches = 0;
+let numberOfGuesses = 0;
 let fetchData = [];
 let userChoice = [];
 let winningPairs = [];
@@ -178,6 +179,8 @@ function turnCard() {
             console.log("checking for match");
             if (userChoice[0].name !== userChoice[1].name) {
                 console.log("no match");
+                numberOfGuesses++;
+                // console.log(numberOfGuesses);
                 //change cards back to background image
                 //timeout function to allow user to see the second card choice
                 setTimeout(function () {
@@ -195,7 +198,8 @@ function turnCard() {
                 console.log("match");
                 //push winning pairs into array to compare for event listener
                 winningPairs.push(userChoice[0].id, userChoice[1].id);
-
+                numberOfGuesses++;
+                // console.log(numberOfGuesses);
                 //remove eventlistener from cards once matched
                 cards.forEach(card12 => {
                     if (winningPairs.includes(card12.getAttribute("data-id"))) {
@@ -205,17 +209,21 @@ function turnCard() {
                     }
                 });
                 //calculate if all matches were found and you win message
-                let winnerAmmount = document.querySelectorAll('.card').length / 2
-                if (scorePoints === winnerAmmount) {
+                let winnerAmmount = document.querySelectorAll('.card').length / 2;
+                if (correctMatches === winnerAmmount) {
 
                     console.log(winnerAmmount)
                 }
-                scorePoints++;
+                correctMatches++;
                 let newScoreDisplay = document.getElementById("score");
-                newScoreDisplay.innerHTML = `Score: ${scorePoints}`;
+                newScoreDisplay.innerHTML = `Matches: ${correctMatches}`;
                 userChoice = [];
-                if (scorePoints === winnerAmmount) {
-                    makeModal(scorePoints);
+                if (correctMatches === winnerAmmount) {
+                    let finalScore = (correctMatches * 10) + winnerAmmount - numberOfGuesses;
+                    if (finalScore < 0) {
+                        finalScore = correctMatches;
+                    }
+                    makeModal(correctMatches, numberOfGuesses, finalScore);
                 };
             };
         };
@@ -238,7 +246,7 @@ function makeHeader() {
     header.append(message);
     let score = document.createElement("div");
     score.setAttribute("id", "score");
-    score.innerHTML = "Score: 0";
+    score.innerHTML = "Matches: 0";
     header.append(score);
     let userOptionsDiv = document.createElement("div");
     userOptionsDiv.setAttribute("id", "options");
@@ -256,14 +264,14 @@ function makeHeader() {
 
 
 //Modal for winning message
-function makeModal(score) {
+function makeModal(matches, guesses, finalScore) {
     let modal = document.createElement("div");
     modal.setAttribute("id", "modal");
     let modalContent = document.createElement("div");
     modalContent.setAttribute("id", "modalContent");
     let modalMessage = document.createElement("p");
     modalMessage.setAttribute("id", "modalMessage");
-    modalMessage.innerHTML = ` YOU WIN with a score of ${score}!!!`;
+    modalMessage.innerHTML = ` YOU WIN!!! You found ${matches} matches in ${guesses} guesses! Your final score is ${finalScore}.`;
     modalContent.append(modalMessage);
     let modalButton = document.createElement("button");
     modalButton.setAttribute("id", "modalButton");
@@ -279,9 +287,10 @@ async function clearData() {
     if (document.getElementById('grid')) {
         grid.remove();
     }
-    score.innerHTML = "Score: 0";
+    score.innerHTML = "Matches: 0";
     score.removeAttribute("class", "winner")
-    scorePoints = 0;
+    correctMatches = 0;
+    numberOfGuesses = 0;
     userChoice = [];
     winningPairs = [];
     arr = [];
