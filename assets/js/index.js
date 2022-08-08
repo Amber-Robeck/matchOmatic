@@ -317,10 +317,8 @@ function changeGame(e) {
 makeHeader();
 
 //TODO:
-//add reset button to reset game
 //add animation to cards flipping over
 //add sound to cards flipping over
 //add local storage to save high score
 //add header to let user know what they chose/what game they are playing
 //let user know match or no match
-//add a tries verses matches for high score
