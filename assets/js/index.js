@@ -178,7 +178,8 @@ function turnCard() {
             //alert disrupts gameplay would like to change to modal or display on page
             console.log("checking for match");
             if (userChoice[0].name !== userChoice[1].name) {
-                console.log("no match");
+                // console.log("no match");
+                userAlert("no match");
                 numberOfGuesses++;
                 //change cards back to background image
                 //timeout function to allow user to see the second card choice
@@ -194,7 +195,8 @@ function turnCard() {
                     userChoice = [];
                 }, 1500);
             } else {
-                console.log("match");
+                // console.log("match");
+                userAlert("match");
                 //push winning pairs into array to compare for event listener
                 winningPairs.push(userChoice[0].id, userChoice[1].id);
                 numberOfGuesses++;
@@ -311,6 +313,19 @@ function changeGame(e) {
             fetchRandomData();
             break;
     }
+};
+
+
+function userAlert(string) {
+    console.log(string);
+    let message = document.getElementById("message");
+    message.setAttribute("class", "alert");
+    message.innerHTML = string.toUpperCase();
+    setTimeout(function () {
+        message.innerHTML = "Select a choice to start matching";
+        message.removeAttribute("class", "alert");
+    }, 1500);
+
 };
 
 //function to create the header allowing user to choose game type

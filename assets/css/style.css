@@ -27,6 +27,12 @@ button {
     font-size: 1.7rem;
 }
 
+.alert {
+    font-weight: 500;
+    /* font-size: 1.2rem; */
+    text-decoration: underline;
+}
+
 /* ----------------End of header stylings------------ */
 
 /* ----------------Beginning of Grid stylings------------ */
