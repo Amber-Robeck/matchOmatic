@@ -177,9 +177,10 @@ function turnCard() {
                 card.removeEventListener("click", turnCard);
             });
             //alert disrupts gameplay would like to change to modal or display on page
-            console.log("checking for match");
+            // console.log("checking for match");
+            // setTimeout(userAlert("Checking for match..."), 3000);
+            userAlert("checking for match");
             if (userChoice[0].name !== userChoice[1].name) {
-                // console.log("no match");
                 userAlert("no match");
                 numberOfGuesses++;
                 //change cards back to background image
@@ -196,7 +197,6 @@ function turnCard() {
                     userChoice = [];
                 }, 1500);
             } else {
-                // console.log("match");
                 userAlert("match");
                 //push winning pairs into array to compare for event listener
                 winningPairs.push(userChoice[0].id, userChoice[1].id);
@@ -324,7 +324,6 @@ function changeGame(e) {
 
 
 function userAlert(string) {
-    console.log(string);
     let message = document.getElementById("message");
     message.setAttribute("class", "alert");
     message.innerHTML = string.toUpperCase();
@@ -342,4 +341,3 @@ makeHeader();
 //add animation to cards flipping over
 //add sound to cards flipping over
 //add local storage to save high score
-//add header to let user know what they chose/what game they are playing
