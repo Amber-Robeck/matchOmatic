@@ -45,6 +45,7 @@ let numberOfGuesses = 0;
 let fetchData = [];
 let userChoice = [];
 let winningPairs = [];
+let matchingSelection;
 
 //function to fetch random images of puppies and then push item twice into fetchData array
 async function fetchPuppy() {
@@ -216,7 +217,7 @@ function turnCard() {
                 }
                 correctMatches++;
                 let newMatchDisplay = document.getElementById("matches");
-                newMatchDisplay.innerHTML = `Matches: ${correctMatches}`;
+                newMatchDisplay.innerHTML = `${matchingSelection} Matches: ${correctMatches}`;
                 userChoice = [];
                 if (correctMatches === winnerAmmount) {
                     let finalScore = (correctMatches * 10) + winnerAmmount - numberOfGuesses;
@@ -303,14 +304,20 @@ function changeGame(e) {
         case "dogs":
             console.log("dogs");
             fetchPuppyData();
+            matchingSelection = "Dog";
+            document.getElementById("matches").innerHTML = matchingSelection + " Matches: 0";
             break;
         case "cats":
             console.log("cats");
             fetchKittenData();
+            matchingSelection = "Cat";
+            document.getElementById("matches").innerHTML = matchingSelection + " Matches: 0";
             break;
         case "random":
             console.log("random");
             fetchRandomData();
+            matchingSelection = "Random";
+            document.getElementById("matches").innerHTML = matchingSelection + " Matches: 0";
             break;
     }
 };
@@ -336,4 +343,3 @@ makeHeader();
 //add sound to cards flipping over
 //add local storage to save high score
 //add header to let user know what they chose/what game they are playing
-//let user know match or no match
