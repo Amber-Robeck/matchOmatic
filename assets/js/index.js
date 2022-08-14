@@ -242,6 +242,11 @@ function makeHeader() {
     title.setAttribute("id", "title");
     title.innerHTML = "MatchOMatic";
     header.append(title);
+    let highScores = document.createElement("a");
+    highScores.setAttribute("id", "highScores");
+    highScores.innerHTML = "View High Scores";
+    highScores.addEventListener("click", localStorageLoad);
+    header.append(highScores);
     let message = document.createElement("p");
     message.setAttribute("id", "message");
     message.innerHTML = "Select a choice to start matching"
@@ -352,7 +357,25 @@ function localStorageSave(finalScore) {
     highscore = JSON.parse(highscore);
     highscore.push({ matchingSelection, finalScore });
     localStorage.setItem("highscore", JSON.stringify(highscore));
+};
+
+function localStorageLoad() {
+    clearData();
+    makeGrid();
+    let highscore = localStorage.getItem("highscore") || [];
+    highscore = JSON.parse(highscore);
+
+    for (let i = 0; i < highscore.length; i++) {
+        let newLi = document.createElement("li");
+        newLi.innerHTML = `${highscore[i].matchingSelection} - ${highscore[i].finalScore}`;
+        let highscoreList = document.createElement("ul");
+        highscoreList.append(newLi);
+        grid.append(highscoreList);
+    };
+
 }
+
+
 
 //function to create the header allowing user to choose game type
 makeHeader();
