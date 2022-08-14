@@ -350,7 +350,7 @@ function localStorageSave(finalScore) {
     }
     let highscore = localStorage.getItem("highscore") || [];
     highscore = JSON.parse(highscore);
-    highscore.push({ matchingSelection: finalScore });
+    highscore.push({ matchingSelection, finalScore });
     localStorage.setItem("highscore", JSON.stringify(highscore));
 }
 
