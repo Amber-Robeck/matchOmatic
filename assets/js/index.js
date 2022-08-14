@@ -225,6 +225,7 @@ function turnCard() {
                         finalScore = correctMatches;
                     }
                     makeModal(correctMatches, numberOfGuesses, finalScore);
+                    localStorageSave(finalScore);
                 };
             };
         };
@@ -333,6 +334,25 @@ function userAlert(string) {
     }, 1500);
 
 };
+
+// function localStorageSave(finalScore) {
+//     let highscore = localStorage.getItem("highscore") || [];
+//     console.log(matchingSelection)
+//         highscore = JSONParse(highscore);
+//         highscore.push({ matchingSelection: finalScore });
+//     }
+//     localStorage.setItem("highscores", JSON.stringify(highscore));
+// }
+
+function localStorageSave(finalScore) {
+    if (localStorage.getItem("highscore") === null) {
+        localStorage.setItem("highscore", JSON.stringify([]));
+    }
+    let highscore = localStorage.getItem("highscore") || [];
+    highscore = JSON.parse(highscore);
+    highscore.push({ matchingSelection: finalScore });
+    localStorage.setItem("highscore", JSON.stringify(highscore));
+}
 
 //function to create the header allowing user to choose game type
 makeHeader();
