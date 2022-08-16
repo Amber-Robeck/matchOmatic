@@ -364,14 +364,18 @@ function localStorageLoad() {
     makeGrid();
     let highscore = localStorage.getItem("highscore") || [];
     highscore = JSON.parse(highscore);
+    let highscoreList = document.createElement("ul");
+    highscoreList.setAttribute("id", "highscoreList");
+    // let divElement = document.createElement("div");
+    // divElement.setAttribute("id", "divElement");
 
     for (let i = 0; i < highscore.length; i++) {
         let newLi = document.createElement("li");
         newLi.innerHTML = `${highscore[i].matchingSelection} - ${highscore[i].finalScore}`;
-        let highscoreList = document.createElement("ul");
         highscoreList.append(newLi);
-        grid.append(highscoreList);
     };
+    grid.append(highscoreList);
+    // doument.body.append(divElement);
 
 }
 
