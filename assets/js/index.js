@@ -225,7 +225,7 @@ function turnCard() {
                         finalScore = correctMatches;
                     }
                     makeModal(correctMatches, numberOfGuesses, finalScore);
-                    localStorageSave(finalScore);
+                    // localStorageSave(finalScore);
                 };
             };
         };
@@ -280,6 +280,16 @@ function makeModal(matches, guesses, finalScore) {
     modalMessage.setAttribute("id", "modalMessage");
     modalMessage.innerHTML = ` YOU WIN!!! You found ${matches} matches in ${guesses} guesses! Your final score is ${finalScore}.`;
     modalContent.append(modalMessage);
+    // let userInitials = document.createElement("input");
+    // userInitials.setAttribute("id", "userInitials");
+    // userInitials.setAttribute("type", "text");
+    // userInitials.setAttribute("placeholder", "Enter Initials");
+    // modalContent.append(userInitials);
+    let submitButton = document.createElement("button");
+    submitButton.setAttribute("id", "submitButton");
+    submitButton.innerHTML = "Save Score";
+    submitButton.addEventListener("click", function () { localStorageSave(finalScore) });
+    modalContent.append(submitButton);
     let modalButton = document.createElement("button");
     modalButton.setAttribute("id", "modalButton");
     modalButton.innerHTML = "Play Again";
@@ -287,6 +297,7 @@ function makeModal(matches, guesses, finalScore) {
     modalContent.append(modalButton);
     modal.append(modalContent);
     grid.append(modal);
+    // localStorageSave(finalScore);
 };
 
 //clears all data from the grid to fix button click issue
@@ -350,14 +361,40 @@ function userAlert(string) {
 // }
 
 function localStorageSave(finalScore) {
+    let userInitials = prompt("Enter your initials to save your score").trim();
+    if (userInitials.length > 0) {
+        alert("Your score has been saved!");
+        newButton();
+    }
+    else if (userInitials.length > 5) {
+        alert("Your initials cannot be more than 5 characters");
+        return localStorageSave(finalScore);
+    }
+    else {
+        alert("You must enter your initials to save your score");
+        return localStorageSave(finalScore);
+    }
+    // let submitButton = document.getElementById("submitButton");
+    // submitButton.removeEventListener("click", localStorageSave);
+    // submitButton.innerHTML = "View High Scores";
+    // submitButton.addEventListener("click", localStorageLoad);
     if (localStorage.getItem("highscore") === null) {
         localStorage.setItem("highscore", JSON.stringify([]));
     }
     let highscore = localStorage.getItem("highscore") || [];
     highscore = JSON.parse(highscore);
-    highscore.push({ matchingSelection, finalScore });
+    highscore.push({ matchingSelection, finalScore, userInitials });
     localStorage.setItem("highscore", JSON.stringify(highscore));
 };
+
+function newButton() {
+    document.getElementById("submitButton").remove();
+    // submitButton.removeEventListener("click", function () { localStorageSave(finalScore) });
+    let newButton = document.createElement("button");
+    newButton.innerHTML = "View High Scores";
+    newButton.addEventListener("click", localStorageLoad)
+    document.getElementById("modalContent").append(newButton);
+}
 
 function localStorageLoad() {
     clearData();
@@ -371,7 +408,7 @@ function localStorageLoad() {
 
     for (let i = 0; i < highscore.length; i++) {
         let newLi = document.createElement("li");
-        newLi.innerHTML = `${highscore[i].matchingSelection} - ${highscore[i].finalScore}`;
+        newLi.innerHTML = `${highscore[i].userInitials} - ${highscore[i].matchingSelection} - ${highscore[i].finalScore}`;
         highscoreList.append(newLi);
     };
     let highscoreHeader = document.createElement("h2");
@@ -381,6 +418,23 @@ function localStorageLoad() {
     grid.append(highscoreList);
     // doument.body.append(divElement);
 
+};
+
+function userInitials() {
+    // let userInitials = document.createElement("input");
+    // userInitials.setAttribute("id", "userInitials");
+    // userInitials.innerHTML = "Enter your initials:";
+    // let submitButton = document.createElement("button");
+    // submitButton.setAttribute("id", "submitButton");
+    // submitButton.innerHTML = "Submit";
+    // submitButton.addEventListener("click", function () {
+    //     let initials = document.getElementById("userInitials").value;
+    //     // localStorageSave(initials);
+    //     // localStorageLoad();
+    // }
+    // );
+    let initials = window.prompt("Enter your initials:", "");
+    return initials;
 }
 
 
