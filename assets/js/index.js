@@ -374,6 +374,10 @@ function localStorageLoad() {
         newLi.innerHTML = `${highscore[i].matchingSelection} - ${highscore[i].finalScore}`;
         highscoreList.append(newLi);
     };
+    let highscoreHeader = document.createElement("h2");
+    highscoreHeader.setAttribute("id", "highscoreHeader");
+    highscoreHeader.innerHTML = "High Scores";
+    grid.append(highscoreHeader);
     grid.append(highscoreList);
     // doument.body.append(divElement);
 
