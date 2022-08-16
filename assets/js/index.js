@@ -46,6 +46,7 @@ let fetchData = [];
 let userChoice = [];
 let winningPairs = [];
 let matchingSelection;
+let userInitials;
 
 //function to fetch random images of puppies and then push item twice into fetchData array
 async function fetchPuppy() {
@@ -361,23 +362,15 @@ function userAlert(string) {
 // }
 
 function localStorageSave(finalScore) {
-    let userInitials = prompt("Enter your initials to save your score").trim();
-    if (userInitials.length > 0) {
-        alert("Your score has been saved!");
-        newButton();
-    }
-    else if (userInitials.length > 5) {
-        alert("Your initials cannot be more than 5 characters");
-        return localStorageSave(finalScore);
-    }
-    else {
-        alert("You must enter your initials to save your score");
-        return localStorageSave(finalScore);
-    }
-    // let submitButton = document.getElementById("submitButton");
-    // submitButton.removeEventListener("click", localStorageSave);
-    // submitButton.innerHTML = "View High Scores";
-    // submitButton.addEventListener("click", localStorageLoad);
+    userInitialSave();
+    // let userInitials = prompt("Enter your initials to save your score").trim();
+    // if ((userInitials.length > 0) && (userInitials.length < 5)) {
+    //     alert("Your score has been saved!");
+    //     newButton();
+    // } else {
+    //     alert("Initials must be 1-5 characters long");
+    //     return localStorageSave(finalScore);
+    // }
     if (localStorage.getItem("highscore") === null) {
         localStorage.setItem("highscore", JSON.stringify([]));
     }
@@ -420,21 +413,16 @@ function localStorageLoad() {
 
 };
 
-function userInitials() {
-    // let userInitials = document.createElement("input");
-    // userInitials.setAttribute("id", "userInitials");
-    // userInitials.innerHTML = "Enter your initials:";
-    // let submitButton = document.createElement("button");
-    // submitButton.setAttribute("id", "submitButton");
-    // submitButton.innerHTML = "Submit";
-    // submitButton.addEventListener("click", function () {
-    //     let initials = document.getElementById("userInitials").value;
-    //     // localStorageSave(initials);
-    //     // localStorageLoad();
-    // }
-    // );
-    let initials = window.prompt("Enter your initials:", "");
-    return initials;
+function userInitialSave() {
+    userInitials = prompt("Enter your initials to save your score").trim();
+    if ((userInitials.length > 0) && (userInitials.length <= 5)) {
+        alert("Your score has been saved!");
+        newButton();
+    } else {
+        alert("Initials must be 1-5 characters long");
+        return userInitialSave();
+    }
+    return userInitials;
 }
 
 
