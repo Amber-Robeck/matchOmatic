@@ -302,7 +302,6 @@ async function clearData() {
         grid.remove();
     }
     matches.innerHTML = "Matches: 0";
-    // matches.removeAttribute("class", "winner")
     correctMatches = 0;
     numberOfGuesses = 0;
     userChoice = [];
