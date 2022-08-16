@@ -46,6 +46,7 @@ let fetchData = [];
 let userChoice = [];
 let winningPairs = [];
 let matchingSelection;
+let userInitials;
 
 //function to fetch random images of puppies and then push item twice into fetchData array
 async function fetchPuppy() {
@@ -225,7 +226,7 @@ function turnCard() {
                         finalScore = correctMatches;
                     }
                     makeModal(correctMatches, numberOfGuesses, finalScore);
-                    localStorageSave(finalScore);
+                    // localStorageSave(finalScore);
                 };
             };
         };
@@ -280,6 +281,11 @@ function makeModal(matches, guesses, finalScore) {
     modalMessage.setAttribute("id", "modalMessage");
     modalMessage.innerHTML = ` YOU WIN!!! You found ${matches} matches in ${guesses} guesses! Your final score is ${finalScore}.`;
     modalContent.append(modalMessage);
+    let submitButton = document.createElement("button");
+    submitButton.setAttribute("id", "submitButton");
+    submitButton.innerHTML = "Save Score";
+    submitButton.addEventListener("click", function () { localStorageSave(finalScore) });
+    modalContent.append(submitButton);
     let modalButton = document.createElement("button");
     modalButton.setAttribute("id", "modalButton");
     modalButton.innerHTML = "Play Again";
@@ -287,6 +293,7 @@ function makeModal(matches, guesses, finalScore) {
     modalContent.append(modalButton);
     modal.append(modalContent);
     grid.append(modal);
+    // localStorageSave(finalScore);
 };
 
 //clears all data from the grid to fix button click issue
@@ -328,7 +335,7 @@ function changeGame(e) {
     }
 };
 
-
+//changes display message back to original
 function userAlert(string) {
     let message = document.getElementById("message");
     message.setAttribute("class", "alert");
@@ -340,39 +347,60 @@ function userAlert(string) {
 
 };
 
-// function localStorageSave(finalScore) {
-//     let highscore = localStorage.getItem("highscore") || [];
-//     console.log(matchingSelection)
-//         highscore = JSONParse(highscore);
-//         highscore.push({ matchingSelection: finalScore });
-//     }
-//     localStorage.setItem("highscores", JSON.stringify(highscore));
-// }
-
+//grabs user initials and score and saves to local storage
 function localStorageSave(finalScore) {
+    userInitialSave();
     if (localStorage.getItem("highscore") === null) {
         localStorage.setItem("highscore", JSON.stringify([]));
     }
     let highscore = localStorage.getItem("highscore") || [];
     highscore = JSON.parse(highscore);
-    highscore.push({ matchingSelection, finalScore });
+    highscore.push({ matchingSelection, finalScore, userInitials });
     localStorage.setItem("highscore", JSON.stringify(highscore));
 };
 
+//creates new button for viewing high scores
+function newButton() {
+    document.getElementById("submitButton").remove();
+    let newButton = document.createElement("button");
+    newButton.innerHTML = "View High Scores";
+    newButton.addEventListener("click", localStorageLoad)
+    document.getElementById("modalContent").append(newButton);
+};
+
+//clears grid then loads high scores from local storage
 function localStorageLoad() {
     clearData();
     makeGrid();
     let highscore = localStorage.getItem("highscore") || [];
     highscore = JSON.parse(highscore);
+    let highscoreList = document.createElement("ul");
+    highscoreList.setAttribute("id", "highscoreList");
 
     for (let i = 0; i < highscore.length; i++) {
         let newLi = document.createElement("li");
-        newLi.innerHTML = `${highscore[i].matchingSelection} - ${highscore[i].finalScore}`;
-        let highscoreList = document.createElement("ul");
+        newLi.innerHTML = `${highscore[i].userInitials} - ${highscore[i].matchingSelection} - ${highscore[i].finalScore}`;
         highscoreList.append(newLi);
-        grid.append(highscoreList);
     };
 
+    let highscoreHeader = document.createElement("h2");
+    highscoreHeader.setAttribute("id", "highscoreHeader");
+    highscoreHeader.innerHTML = "High Scores";
+    grid.append(highscoreHeader);
+    grid.append(highscoreList);
+};
+
+//recursive function to grab user initials 
+function userInitialSave() {
+    userInitials = prompt("Enter your initials to save your score").trim();
+    if ((userInitials.length > 0) && (userInitials.length <= 5)) {
+        alert("Your score has been saved!");
+        newButton();
+    } else {
+        alert("Initials must be 1-5 characters long");
+        return userInitialSave();
+    }
+    return userInitials;
 }
 
 
@@ -383,4 +411,3 @@ makeHeader();
 //TODO:
 //add animation to cards flipping over
 //add sound to cards flipping over
-//add local storage to save high score

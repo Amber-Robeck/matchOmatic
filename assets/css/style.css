@@ -132,6 +132,31 @@ button {
 
 /* -----------End Modal styles------------ */
 
+/* -----------Begin highscore styles------------ */
+/* 
+/* #highscore {
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-decoration: underline;
+} */
+#highscoreList {
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+#highscoreList li {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: .1rem;
+    margin-top: none;
+}
+
+/* -----------End highscore styles------------ */
+
 /* -------------Media query 600------------ */
 @media screen and (max-width: 600px) {
     #title {
