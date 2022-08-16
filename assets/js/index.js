@@ -281,11 +281,6 @@ function makeModal(matches, guesses, finalScore) {
     modalMessage.setAttribute("id", "modalMessage");
     modalMessage.innerHTML = ` YOU WIN!!! You found ${matches} matches in ${guesses} guesses! Your final score is ${finalScore}.`;
     modalContent.append(modalMessage);
-    // let userInitials = document.createElement("input");
-    // userInitials.setAttribute("id", "userInitials");
-    // userInitials.setAttribute("type", "text");
-    // userInitials.setAttribute("placeholder", "Enter Initials");
-    // modalContent.append(userInitials);
     let submitButton = document.createElement("button");
     submitButton.setAttribute("id", "submitButton");
     submitButton.innerHTML = "Save Score";
@@ -340,7 +335,7 @@ function changeGame(e) {
     }
 };
 
-
+//changes display message back to original
 function userAlert(string) {
     let message = document.getElementById("message");
     message.setAttribute("class", "alert");
@@ -352,25 +347,9 @@ function userAlert(string) {
 
 };
 
-// function localStorageSave(finalScore) {
-//     let highscore = localStorage.getItem("highscore") || [];
-//     console.log(matchingSelection)
-//         highscore = JSONParse(highscore);
-//         highscore.push({ matchingSelection: finalScore });
-//     }
-//     localStorage.setItem("highscores", JSON.stringify(highscore));
-// }
-
+//grabs user initials and score and saves to local storage
 function localStorageSave(finalScore) {
     userInitialSave();
-    // let userInitials = prompt("Enter your initials to save your score").trim();
-    // if ((userInitials.length > 0) && (userInitials.length < 5)) {
-    //     alert("Your score has been saved!");
-    //     newButton();
-    // } else {
-    //     alert("Initials must be 1-5 characters long");
-    //     return localStorageSave(finalScore);
-    // }
     if (localStorage.getItem("highscore") === null) {
         localStorage.setItem("highscore", JSON.stringify([]));
     }
@@ -380,15 +359,16 @@ function localStorageSave(finalScore) {
     localStorage.setItem("highscore", JSON.stringify(highscore));
 };
 
+//creates new button for viewing high scores
 function newButton() {
     document.getElementById("submitButton").remove();
-    // submitButton.removeEventListener("click", function () { localStorageSave(finalScore) });
     let newButton = document.createElement("button");
     newButton.innerHTML = "View High Scores";
     newButton.addEventListener("click", localStorageLoad)
     document.getElementById("modalContent").append(newButton);
-}
+};
 
+//clears grid then loads high scores from local storage
 function localStorageLoad() {
     clearData();
     makeGrid();
@@ -396,23 +376,21 @@ function localStorageLoad() {
     highscore = JSON.parse(highscore);
     let highscoreList = document.createElement("ul");
     highscoreList.setAttribute("id", "highscoreList");
-    // let divElement = document.createElement("div");
-    // divElement.setAttribute("id", "divElement");
 
     for (let i = 0; i < highscore.length; i++) {
         let newLi = document.createElement("li");
         newLi.innerHTML = `${highscore[i].userInitials} - ${highscore[i].matchingSelection} - ${highscore[i].finalScore}`;
         highscoreList.append(newLi);
     };
+
     let highscoreHeader = document.createElement("h2");
     highscoreHeader.setAttribute("id", "highscoreHeader");
     highscoreHeader.innerHTML = "High Scores";
     grid.append(highscoreHeader);
     grid.append(highscoreList);
-    // doument.body.append(divElement);
-
 };
 
+//recursive function to grab user initials 
 function userInitialSave() {
     userInitials = prompt("Enter your initials to save your score").trim();
     if ((userInitials.length > 0) && (userInitials.length <= 5)) {
@@ -433,4 +411,3 @@ makeHeader();
 //TODO:
 //add animation to cards flipping over
 //add sound to cards flipping over
-//add local storage to save high score
