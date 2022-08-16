@@ -37,6 +37,7 @@ Currently this application is able to:
 * Match the pictures by clicking on the cards.
 * Display the number of matches made as a score.
 * Let User know they won the game if they have matched all the cards.
+* Save initials into local storage for high score.
 
 
 
