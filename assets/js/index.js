@@ -47,6 +47,8 @@ let userChoice = [];
 let winningPairs = [];
 let matchingSelection;
 let userInitials;
+//safari click experiment
+document.addEventListener("touchstart", function () { }, false);
 
 //function to fetch random images of puppies and then push item twice into fetchData array
 async function fetchPuppy() {
