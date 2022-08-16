@@ -355,7 +355,16 @@ function localStorageSave(finalScore) {
     let highscore = localStorage.getItem("highscore") || [];
     highscore = JSON.parse(highscore);
     highscore.push({ matchingSelection, finalScore, userInitials });
+    //sort array by final score
+    highscore.sort(function (a, b) {
+        return b.finalScore - a.finalScore;
+    });
+    //limit array to 5
+    if (highscore.length > 5) {
+        highscore.pop();
+    }
     localStorage.setItem("highscore", JSON.stringify(highscore));
+
 };
 
 //creates new button for viewing high scores
@@ -373,6 +382,9 @@ function localStorageLoad() {
     makeGrid();
     let highscore = localStorage.getItem("highscore") || [];
     highscore = JSON.parse(highscore);
+    // highscore.sort(function (a, b) {
+    //     return b.finalScore - a.finalScore;
+    // });
     let highscoreList = document.createElement("ul");
     highscoreList.setAttribute("id", "highscoreList");
 
