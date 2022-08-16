@@ -9,7 +9,7 @@
 
  ## Description
 
-_Welcome to MatchOMatic, a friendly matching game where a user can pick what types of pictures they would like to match from multiple different api's/datasets. Currently this application is set up to retrieve data from the [DOG API](https://dog.ceo/dog-api/ "DOG link") as well as the [CATS AS A SERVICE (CATAAS) API](https://cataas.com/#/ "CATAAS link")._ 
+_Welcome to MatchOMatic, a friendly matching game where a user can pick what types of pictures they would like to match from multiple different API's/datasets. Currently this application is set up to retrieve data from the [DOG API](https://dog.ceo/dog-api/ "DOG link") as well as the [CATS AS A SERVICE (CATAAS) API](https://cataas.com/#/ "CATAAS link")._ 
 
 
 This application:
@@ -56,10 +56,20 @@ This project is deployed on [GitHub Pages](https://amber-robeck.github.io/matchO
 
 Here are some screen shots of this application.
 
-Currently this application does not have any screenshots.
 
-<img src="" alt="" width="700"/>
+<img src="./assets/images/mainscreen.png" alt="mainscreen" width="700"/>
 
+
+<img src="./assets/images/catChoice.png" alt="cat choice" width="700"/>
+
+
+<img src="./assets/images/catMatch.png" alt="match for cats" width="700"/>
+
+
+<img src="./assets/images/winner.png" alt="winner modal" width="700"/>
+
+
+<img src="./assets/images/highscore.png" alt="highscore page" width="700"/>
 
 
 
