@@ -107,6 +107,7 @@ async function callPuppy() {
 //     mixAndMake(arr);
 // };
 
+//funcion to fetch picure data and alert option chosen to user
 async function fetchPictures(optionPicked) {
     await clearData();
     switch (optionPicked) {
@@ -125,6 +126,7 @@ async function fetchPictures(optionPicked) {
             mixAndMake(arr);
             break;
     }
+    document.getElementById("matches").innerHTML = matchingSelection + " Matches: 0";
 };
 
 function mixAndMake(array) {
@@ -334,27 +336,22 @@ function changeGame(e) {
     let optionPicked = e.target.id;
     switch (optionPicked) {
         case "dogs":
-            console.log("dogs");
-            // fetchPuppyData();
             matchingSelection = "Dog";
-            fetchPictures(matchingSelection);
-            document.getElementById("matches").innerHTML = matchingSelection + " Matches: 0";
+            // fetchPictures(matchingSelection);
+            // document.getElementById("matches").innerHTML = matchingSelection + " Matches: 0";
             break;
         case "cats":
-            console.log("cats");
-            // fetchKittenData();
             matchingSelection = "Cat";
-            fetchPictures(matchingSelection);
-            document.getElementById("matches").innerHTML = matchingSelection + " Matches: 0";
+            // fetchPictures(matchingSelection);
+            // document.getElementById("matches").innerHTML = matchingSelection + " Matches: 0";
             break;
         case "random":
-            console.log("random");
-            // fetchRandomData();
             matchingSelection = "Random";
-            fetchPictures(matchingSelection);
-            document.getElementById("matches").innerHTML = matchingSelection + " Matches: 0";
+            // fetchPictures(matchingSelection);
+            // document.getElementById("matches").innerHTML = matchingSelection + " Matches: 0";
             break;
     }
+    fetchPictures(matchingSelection);
 };
 
 //changes display message back to original
