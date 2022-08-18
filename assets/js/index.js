@@ -86,25 +86,45 @@ async function callPuppy() {
     return fetchData;
 };
 
-async function fetchPuppyData() {
-    await clearData();
-    await callPuppy();
-    await checkData();
-    //still unsure about this not being async, first time wasn't shuffled but after that every time it was
-    mixAndMake(fetchData);
-};
+// async function fetchPuppyData() {
+//     await clearData();
+//     await callPuppy();
+//     await checkData();
+//     //still unsure about this not being async, first time wasn't shuffled but after that every time it was
+//     mixAndMake(fetchData);
+// };
 
-async function fetchKittenData() {
-    await clearData();
-    arr = [];
-    arr = catData.concat(catData);
-    mixAndMake(arr);
-};
+// async function fetchKittenData() {
+//     await clearData();
+//     arr = [];
+//     arr = catData.concat(catData);
+//     mixAndMake(arr);
+// };
 
-async function fetchRandomData() {
+// async function fetchRandomData() {
+//     await clearData();
+//     arr = dData
+//     mixAndMake(arr);
+// };
+
+async function fetchPictures(optionPicked) {
     await clearData();
-    arr = dData
-    mixAndMake(arr);
+    switch (optionPicked) {
+        case "Dog":
+            await callPuppy();
+            await checkData();
+            mixAndMake(fetchData);
+            break;
+        case "Cat":
+            arr = [];
+            arr = catData.concat(catData);
+            mixAndMake(arr);
+            break;
+        case "Random":
+            arr = dData;
+            mixAndMake(arr);
+            break;
+    }
 };
 
 function mixAndMake(array) {
@@ -315,20 +335,23 @@ function changeGame(e) {
     switch (optionPicked) {
         case "dogs":
             console.log("dogs");
-            fetchPuppyData();
+            // fetchPuppyData();
             matchingSelection = "Dog";
+            fetchPictures(matchingSelection);
             document.getElementById("matches").innerHTML = matchingSelection + " Matches: 0";
             break;
         case "cats":
             console.log("cats");
-            fetchKittenData();
+            // fetchKittenData();
             matchingSelection = "Cat";
+            fetchPictures(matchingSelection);
             document.getElementById("matches").innerHTML = matchingSelection + " Matches: 0";
             break;
         case "random":
             console.log("random");
-            fetchRandomData();
+            // fetchRandomData();
             matchingSelection = "Random";
+            fetchPictures(matchingSelection);
             document.getElementById("matches").innerHTML = matchingSelection + " Matches: 0";
             break;
     }
