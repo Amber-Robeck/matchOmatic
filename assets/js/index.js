@@ -86,27 +86,6 @@ async function callPuppy() {
     return fetchData;
 };
 
-// async function fetchPuppyData() {
-//     await clearData();
-//     await callPuppy();
-//     await checkData();
-//     //still unsure about this not being async, first time wasn't shuffled but after that every time it was
-//     mixAndMake(fetchData);
-// };
-
-// async function fetchKittenData() {
-//     await clearData();
-//     arr = [];
-//     arr = catData.concat(catData);
-//     mixAndMake(arr);
-// };
-
-// async function fetchRandomData() {
-//     await clearData();
-//     arr = dData
-//     mixAndMake(arr);
-// };
-
 //funcion to fetch picure data and alert option chosen to user
 async function fetchPictures(optionPicked) {
     await clearData();
@@ -209,7 +188,6 @@ function turnCard() {
                 //change cards back to background image
                 //timeout function to allow user to see the second card choice
                 setTimeout(function () {
-                    console.log(userChoice[0].id, userChoice[1].id);
                     choiceOne.setAttribute("src", "./assets/images/background.png");
                     choiceTwo.setAttribute("src", "./assets/images/background.png");
                     //no match returns event listener
@@ -234,10 +212,6 @@ function turnCard() {
                 });
                 //calculate if all matches were found and you win message
                 let winnerAmmount = document.querySelectorAll('.card').length / 2;
-                if (correctMatches === winnerAmmount) {
-
-                    console.log(winnerAmmount)
-                }
                 correctMatches++;
                 let newMatchDisplay = document.getElementById("matches");
                 newMatchDisplay.innerHTML = `${matchingSelection} Matches: ${correctMatches}`;
@@ -248,7 +222,6 @@ function turnCard() {
                         finalScore = correctMatches;
                     }
                     makeModal(correctMatches, numberOfGuesses, finalScore);
-                    // localStorageSave(finalScore);
                 };
             };
         };
@@ -337,18 +310,12 @@ function changeGame(e) {
     switch (optionPicked) {
         case "dogs":
             matchingSelection = "Dog";
-            // fetchPictures(matchingSelection);
-            // document.getElementById("matches").innerHTML = matchingSelection + " Matches: 0";
             break;
         case "cats":
             matchingSelection = "Cat";
-            // fetchPictures(matchingSelection);
-            // document.getElementById("matches").innerHTML = matchingSelection + " Matches: 0";
             break;
         case "random":
             matchingSelection = "Random";
-            // fetchPictures(matchingSelection);
-            // document.getElementById("matches").innerHTML = matchingSelection + " Matches: 0";
             break;
     }
     fetchPictures(matchingSelection);
